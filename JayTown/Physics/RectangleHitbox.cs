@@ -2,14 +2,14 @@ using Microsoft.Xna.Framework;
 
 namespace JayTown.Physics;
 
-public abstract class RectangularHitbox: IHasHitbox
+public abstract class RectangleHitbox: IHasHitbox
 {
-    private Point position;
+    protected Point position;
     private Rectangle rectangle;
     private int width;
     private int height;
 
-    public RectangularHitbox(Point position,int width,int height)
+    public RectangleHitbox(Point position,int width,int height)
     {
         this.position = position;
         this.width = width;
@@ -17,7 +17,7 @@ public abstract class RectangularHitbox: IHasHitbox
         this.rectangle = new Rectangle(position, new Point(width, height));
     }
 
-    public bool Intersects(Point point)
+    public virtual bool Intersects(Point point)
     {
         return this.rectangle.Contains(point);
     }
