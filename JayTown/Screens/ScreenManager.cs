@@ -34,9 +34,9 @@ public class ScreenManager
         }
     }
 
-    public void ClearLayer(int layer)
+    public void ClearScreen(int screen)
     {
-        this.foreground.RemoveAt(layer);
+        this.foreground.RemoveAt(screen);
     }
 
     public void Clear(FullScreen newBackground)
