@@ -4,7 +4,7 @@ namespace JayTown.Screens;
 
 public abstract class PopupScreen: Screen
 {
-    public PopupScreen(SpriteBatch spriteBatch): base(spriteBatch)
+    protected PopupScreen(SpriteBatch spriteBatch): base(spriteBatch)
     {
         
     }

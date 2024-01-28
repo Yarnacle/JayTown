@@ -10,7 +10,7 @@ public class Game1 : Game
 {
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
-    private ScreenManager screenManager;
+    private ScreenManager _screenManager;
 
     public Game1()
     {
@@ -32,15 +32,15 @@ public class Game1 : Game
         _spriteBatch = new SpriteBatch(GraphicsDevice);
 
         Textures.Load(Content,GraphicsDevice);
-        this.screenManager = new ScreenManager(new HomeScreen(_spriteBatch));
+        this._screenManager = new ScreenManager(new HomeScreen(_spriteBatch));
     }
 
     protected override void Update(GameTime gameTime)
     {
         if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             Exit();
-
-       this.screenManager.Update(gameTime);
+        
+        _screenManager.Update(gameTime);
 
         base.Update(gameTime);
     }
@@ -49,7 +49,7 @@ public class Game1 : Game
     {
         _spriteBatch.Begin();
 
-        this.screenManager.Draw(gameTime);
+        this._screenManager.Draw(gameTime);
         _spriteBatch.End();
         base.Draw(gameTime);
     }

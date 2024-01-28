@@ -20,7 +20,7 @@ public class HomeScreen: FullScreen
 
     public override void Draw(GameTime gameTime)
     {
-        spriteBatch.Draw(Textures.HomeScreen.Lan,FullScreen.rectangle,Color.White);
+        SpriteBatch.Draw(Textures.HomeScreen.Lan,FullScreen.ScreenRectangle,Color.White);
     }
     
 }

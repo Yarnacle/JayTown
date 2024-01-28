@@ -1,6 +1,5 @@
 using System.Dynamic;
 using System.IO;
-using JayTown.Screens;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -8,13 +7,13 @@ namespace JayTown.GameTextures;
 
 public static class Textures
 {
-    public static GraphicsDevice graphicsDevice;
+    private static GraphicsDevice _graphicsDevice;
     
     public static dynamic HomeScreen;
     
     public static void Load(ContentManager content,GraphicsDevice graphicsDevice)
     {
-        Textures.graphicsDevice = graphicsDevice;
+        Textures._graphicsDevice = graphicsDevice;
         
         // Directories
         HomeScreen = new ExpandoObject();
@@ -26,7 +25,7 @@ public static class Textures
     private static Texture2D Load(string path)
     {
         FileStream fileStream = new FileStream("Content/Textures/" + path, FileMode.Open);
-        Texture2D texture = Texture2D.FromStream(graphicsDevice,fileStream);
+        Texture2D texture = Texture2D.FromStream(_graphicsDevice,fileStream);
         fileStream.Dispose();
         return texture;
     }

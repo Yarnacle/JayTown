@@ -1,25 +1,23 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using Microsoft.Xna.Framework;
 
 namespace JayTown.Screens;
 
 public class ScreenManager
 {
-    private FullScreen background;
-    private List<Screen> foreground;
+    private FullScreen _background;
+    private readonly List<Screen> _foreground;
 
     public ScreenManager(FullScreen home)
     {
-        this.background = home;
-        this.foreground = new List<Screen>();
+        this._background = home;
+        this._foreground = new List<Screen>();
     }
 
     public void Update(GameTime gameTime)
     {
-        background.Update(gameTime);
-        foreach (var screen in foreground)
+        _background.Update(gameTime);
+        foreach (var screen in _foreground)
         {
             screen.Update(gameTime);
         }
@@ -27,8 +25,8 @@ public class ScreenManager
 
     public void Draw(GameTime gameTime)
     {
-        background.Draw(gameTime);
-        foreach (var screen in foreground)
+        _background.Draw(gameTime);
+        foreach (var screen in _foreground)
         {
             screen.Draw(gameTime);
         }
@@ -36,26 +34,26 @@ public class ScreenManager
 
     public void ClearScreen(int screen)
     {
-        this.foreground.RemoveAt(screen);
+        this._foreground.RemoveAt(screen);
     }
 
     public void Clear(FullScreen newBackground)
     {
-        this.background = newBackground;
-        this.foreground.Clear();
+        this._background = newBackground;
+        this._foreground.Clear();
     }
 
     public void RemoveScreen(Screen screen)
     {    
-        this.foreground.Remove(screen);
+        this._foreground.Remove(screen);
     }
 
     public void InsertScreen(int i,Screen screen)
     {
-        this.foreground.Insert(i,screen);
+        this._foreground.Insert(i,screen);
     }
     public void AddScreen(Screen screen)
     {
-        this.foreground.Add(screen);
+        this._foreground.Add(screen);
     }
 }
