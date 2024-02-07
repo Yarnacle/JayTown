@@ -107,11 +107,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/roger/Projects/JayTown/JayTown/JayTown.csproj",
+      "projectUniqueName": "/home/roger/Desktop/RiderProjects/JayTown/JayTown/JayTown.csproj",
       "projectName": "JayTown",
-      "projectPath": "/home/roger/Projects/JayTown/JayTown/JayTown.csproj",
+      "projectPath": "/home/roger/Desktop/RiderProjects/JayTown/JayTown/JayTown.csproj",
       "packagesPath": "/home/roger/.nuget/packages/",
-      "outputPath": "/home/roger/Projects/JayTown/JayTown/obj/",
+      "outputPath": "/home/roger/Desktop/RiderProjects/JayTown/JayTown/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/roger/.nuget/NuGet/NuGet.Config"

@@ -1,20 +1,23 @@
 using System.Collections.Generic;
+using JayTown.GameTextures;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace JayTown.Screens;
 
 public class ScreenManager
 {
+    private readonly SpriteBatch _spriteBatch;
     private FullScreen _background;
     private readonly List<Screen> _foreground;
 
-    public ScreenManager(FullScreen home)
+    public ScreenManager(SpriteBatch spriteBatch)
     {
-        this._background = home;
-        this._foreground = new List<Screen>();
+        _spriteBatch = spriteBatch;
+        _foreground = new List<Screen>();
     }
 
-    public void Update(GameTime gameTime)
+public void Update(GameTime gameTime)
     {
         _background.Update(gameTime);
         foreach (var screen in _foreground)
@@ -25,6 +28,7 @@ public class ScreenManager
 
     public void Draw(GameTime gameTime)
     {
+        _spriteBatch.Draw(Textures.General.ClearScreen,FullScreen.Box,Color.White);
         _background.Draw(gameTime);
         foreach (var screen in _foreground)
         {
@@ -32,28 +36,41 @@ public class ScreenManager
         }
     }
 
-    public void ClearScreen(int screen)
+    public void ClearForegroundLayer(int screen)
     {
-        this._foreground.RemoveAt(screen);
+        _foreground.RemoveAt(screen);
     }
 
-    public void Clear(FullScreen newBackground)
+    public void ClearTop()
     {
-        this._background = newBackground;
-        this._foreground.Clear();
+        if (_foreground.Count == 0)
+        {
+            return;
+        }
+        _foreground.RemoveAt(_foreground.Count - 1);
     }
 
-    public void RemoveScreen(Screen screen)
+    public void ClearForeground()
+    {
+        _foreground.Clear();
+    }
+    public void ClearAll(FullScreen newBackground)
+    {
+        _background = newBackground;
+        _foreground.Clear();
+    }
+
+    public void ClearForegroundScreen(Screen screen)
     {    
-        this._foreground.Remove(screen);
+        _foreground.Remove(screen);
     }
 
     public void InsertScreen(int i,Screen screen)
     {
-        this._foreground.Insert(i,screen);
+        _foreground.Insert(i,screen);
     }
     public void AddScreen(Screen screen)
     {
-        this._foreground.Add(screen);
+        _foreground.Add(screen);
     }
 }

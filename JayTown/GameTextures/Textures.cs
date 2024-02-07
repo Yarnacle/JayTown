@@ -9,24 +9,25 @@ public static class Textures
 {
     private static GraphicsDevice _graphicsDevice;
     
-    public static dynamic HomeScreen;
+    // Directories
+    public static readonly dynamic HomeScreen = new ExpandoObject();
+    public static readonly dynamic General = new ExpandoObject();
     
-    public static void Load(ContentManager content,GraphicsDevice graphicsDevice)
+    public static void Load(GraphicsDevice graphicsDevice)
     {
-        Textures._graphicsDevice = graphicsDevice;
-        
-        // Directories
-        HomeScreen = new ExpandoObject();
+        _graphicsDevice = graphicsDevice;
         
         // Textures
+        General.SolidColor = Load("General/SolidColor.png");
+        General.ClearScreen = Load("General/ClearScreen.png");
+        
         HomeScreen.Lan = Load("HomeScreen/Lan.png");
     }
 
     private static Texture2D Load(string path)
     {
-        FileStream fileStream = new FileStream("Content/Textures/" + path, FileMode.Open);
-        Texture2D texture = Texture2D.FromStream(_graphicsDevice,fileStream);
-        fileStream.Dispose();
+        using var fileStream = new FileStream("Content/Textures/" + path, FileMode.Open);
+        var texture = Texture2D.FromStream(_graphicsDevice,fileStream);
         return texture;
     }
 }

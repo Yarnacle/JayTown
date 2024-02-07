@@ -5,9 +5,9 @@ namespace JayTown.Screens;
 
 public abstract class FullScreen: Screen
 {
-    public static Rectangle ScreenRectangle = new Rectangle(0, 0, 1000, 1000);
+    public static readonly Rectangle Box = new Rectangle(0, 0, 1000, 1000);
     
-    protected FullScreen(SpriteBatch spriteBatch) : base(spriteBatch)
+    protected FullScreen(ScreenManager manager,SpriteBatch spriteBatch) : base(manager,spriteBatch)
     {
         
     }

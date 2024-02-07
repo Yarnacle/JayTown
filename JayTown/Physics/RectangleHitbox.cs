@@ -11,19 +11,19 @@ public abstract class RectangleHitbox: IHasHitbox
 
     protected RectangleHitbox(Point position,int width,int height)
     {
-        this.Position = position;
-        this._width = width;
-        this._height = height;
-        this._rectangle = new Rectangle(position, new Point(width, height));
+        Position = position;
+        _width = width;
+        _height = height;
+        _rectangle = new Rectangle(position, new Point(width, height));
     }
 
     public virtual bool Intersects(Point point)
     {
-        return this._rectangle.Contains(point);
+        return _rectangle.Contains(point);
     }
 
     public Point GetPosition()
     {
-        return this.Position;
+        return Position;
     }
 }

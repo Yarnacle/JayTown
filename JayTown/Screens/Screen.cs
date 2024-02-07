@@ -5,11 +5,13 @@ namespace JayTown.Screens;
 
 public abstract class Screen
 {
+    protected readonly ScreenManager ScreenManager;
     protected readonly SpriteBatch SpriteBatch;
     
-    protected Screen(SpriteBatch spriteBatch)
+    protected Screen(ScreenManager manager,SpriteBatch spriteBatch)
     {
-        this.SpriteBatch = spriteBatch;
+        ScreenManager = manager;
+        SpriteBatch = spriteBatch;
     }
     
     public abstract void Update(GameTime gameTime);

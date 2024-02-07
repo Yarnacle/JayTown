@@ -12,6 +12,9 @@ public class Game1 : Game
     private SpriteBatch _spriteBatch;
     private ScreenManager _screenManager;
 
+    private static KeyboardState _kb = Keyboard.GetState();
+    private static KeyboardState _oldKb;
+
     public Game1()
     {
         _graphics = new GraphicsDeviceManager(this);
@@ -21,18 +24,19 @@ public class Game1 : Game
         IsMouseVisible = false;
     }
 
-    protected override void Initialize()
-    {
-        
-        base.Initialize();
-    }
+    // protected override void Initialize()
+    // {
+    //     
+    //     base.Initialize();
+    // }
 
     protected override void LoadContent()
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-        Textures.Load(Content,GraphicsDevice);
-        this._screenManager = new ScreenManager(new HomeScreen(_spriteBatch));
+        Textures.Load(GraphicsDevice);
+        _screenManager = new ScreenManager(_spriteBatch);
+        _screenManager.ClearAll(new HomeScreen(_screenManager,_spriteBatch));
     }
 
     protected override void Update(GameTime gameTime)
@@ -49,8 +53,23 @@ public class Game1 : Game
     {
         _spriteBatch.Begin();
 
-        this._screenManager.Draw(gameTime);
+        _screenManager.Draw(gameTime);
         _spriteBatch.End();
         base.Draw(gameTime);
+    }
+    public static bool IsKeyPressed(Keys key)
+    {
+        return _kb.IsKeyDown(key) && !_oldKb.IsKeyDown(key);
+    }
+
+    public static bool IsKeyDown(Keys key)
+    {
+        return _kb.IsKeyDown(key);
+    }
+
+    public static void UpdateKb()
+    {
+        _oldKb = _kb;
+        _kb = Keyboard.GetState();
     }
 }

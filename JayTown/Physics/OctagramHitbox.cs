@@ -11,11 +11,11 @@ public abstract class OctagramHitbox: RectangleHitbox
     
     protected OctagramHitbox(Point position,int radius): base(position,(int)Math.Round(radius * RadiusMultiplier),(int)Math.Round(radius * RadiusMultiplier))
     {
-        this._radius = radius;
+        _radius = radius;
     }
 
     public override bool Intersects(Point point)
     {
-        return Math.Abs(this.Position.X - point.X) + Math.Abs(this.Position.Y - point.Y) <= _radius || base.Intersects(point);
+        return Math.Abs(Position.X - point.X) + Math.Abs(Position.Y - point.Y) <= _radius || base.Intersects(point);
     }
 }

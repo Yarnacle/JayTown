@@ -1,26 +1,46 @@
-using System.Transactions;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using JayTown.GameTextures;
 using System;
+using Microsoft.Xna.Framework.Input;
 
 namespace JayTown.Screens;
 
 public class HomeScreen: FullScreen
 {
-    public HomeScreen(SpriteBatch spriteBatch): base(spriteBatch)
+    private int _number;
+    
+    public HomeScreen(ScreenManager manager,SpriteBatch spriteBatch): base(manager,spriteBatch)
     {
-        
+        _number = 0;
     }
 
     public override void Update(GameTime gameTime)
     {
-        
+        if (Game1.IsKeyDown(Keys.Space))
+        {
+            var random = new Random();
+            ScreenManager.AddScreen(new TestPopup(ScreenManager,SpriteBatch,new Rectangle(random.Next(0,700),random.Next(0,700),300,300)));
+            _number++;
+        }
+
+        if (Game1.IsKeyDown(Keys.LeftShift))
+        {
+            ScreenManager.ClearTop();
+            _number = Math.Max(0, _number - 1);
+        }
+
+        if (Game1.IsKeyPressed(Keys.C))
+        {
+            ScreenManager.ClearForeground();
+        }
+
+        Game1.UpdateKb();
     }
 
     public override void Draw(GameTime gameTime)
     {
-        SpriteBatch.Draw(Textures.HomeScreen.Lan,FullScreen.ScreenRectangle,Color.White);
+        // SpriteBatch.Draw(Textures.General.SolidColor,FullScreen.ScreenRectangle,Color.Blue);
     }
     
 }
