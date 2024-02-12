@@ -9,10 +9,12 @@ namespace JayTown.Screens;
 public class HomeScreen: FullScreen
 {
     private int _number;
+    private readonly TextPopup _text;
     
     public HomeScreen(ScreenManager manager,SpriteBatch spriteBatch): base(manager,spriteBatch)
     {
         _number = 0;
+        _text = new TextPopup(manager, spriteBatch, new Rectangle(300, 300, 100, 100),Textures.General.Font,"Test textbox",Color.White);
     }
 
     public override void Update(GameTime gameTime)
@@ -20,7 +22,7 @@ public class HomeScreen: FullScreen
         if (Game1.IsKeyDown(Keys.Space))
         {
             var random = new Random();
-            ScreenManager.AddScreen(new TestPopup(ScreenManager,SpriteBatch,new Rectangle(random.Next(0,700),random.Next(0,700),300,300)));
+            ScreenManager.Add(new TestPopup(ScreenManager,SpriteBatch,new Rectangle(random.Next(0,700),random.Next(0,700),300,300)));
             _number++;
         }
 
@@ -40,7 +42,8 @@ public class HomeScreen: FullScreen
 
     public override void Draw(GameTime gameTime)
     {
-        // SpriteBatch.Draw(Textures.General.SolidColor,FullScreen.ScreenRectangle,Color.Blue);
+        SpriteBatch.Draw(Textures.HomeScreen.Background,FullScreen.Box,Color.White);
+        _text.Draw(gameTime);
     }
     
 }

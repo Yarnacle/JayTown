@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace JayTown.Screens;
 
-public class TestPopup: PopupScreen
+public class TestPopup: Popup
 {
     public TestPopup(ScreenManager manager,SpriteBatch spriteBatch,Rectangle box) : base(manager,spriteBatch,box)
     {

@@ -36,9 +36,9 @@ public void Update(GameTime gameTime)
         }
     }
 
-    public void ClearForegroundLayer(int screen)
+    public void RemoveAt(int index)
     {
-        _foreground.RemoveAt(screen);
+        _foreground.RemoveAt(index);
     }
 
     public void ClearTop()
@@ -60,16 +60,16 @@ public void Update(GameTime gameTime)
         _foreground.Clear();
     }
 
-    public void ClearForegroundScreen(Screen screen)
+    public void Remove(Screen screen)
     {    
         _foreground.Remove(screen);
     }
 
-    public void InsertScreen(int i,Screen screen)
+    public void Insert(int i,Screen screen)
     {
         _foreground.Insert(i,screen);
     }
-    public void AddScreen(Screen screen)
+    public void Add(Screen screen)
     {
         _foreground.Add(screen);
     }

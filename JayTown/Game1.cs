@@ -34,7 +34,7 @@ public class Game1 : Game
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-        Textures.Load(GraphicsDevice);
+        Textures.Load(GraphicsDevice,Content);
         _screenManager = new ScreenManager(_spriteBatch);
         _screenManager.ClearAll(new HomeScreen(_screenManager,_spriteBatch));
     }
@@ -51,7 +51,7 @@ public class Game1 : Game
 
     protected override void Draw(GameTime gameTime)
     {
-        _spriteBatch.Begin();
+        _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, RasterizerState.CullCounterClockwise);
 
         _screenManager.Draw(gameTime);
         _spriteBatch.End();

@@ -3,10 +3,10 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace JayTown.Screens;
 
-public abstract class PopupScreen: Screen
+public abstract class Popup: Screen
 {
     protected Rectangle Box;
-    protected PopupScreen(ScreenManager manager,SpriteBatch spriteBatch,Rectangle box): base(manager,spriteBatch)
+    protected Popup(ScreenManager manager,SpriteBatch spriteBatch,Rectangle box): base(manager,spriteBatch)
     {
         Box = box;
     }
