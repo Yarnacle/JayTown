@@ -21,8 +21,8 @@ public static class Textures
         General.SolidColor = Load("General/SolidColor.png");
         General.ClearScreen = Load("General/ClearScreen.png");
         General.Font = LoadFont(content,"PixelFont");
+        General.Lan = Load("HomeScreen/Lan.png");
         
-        HomeScreen.Lan = Load("HomeScreen/Lan.png");
         HomeScreen.Background = Load("HomeScreen/Background.png");
     }
 

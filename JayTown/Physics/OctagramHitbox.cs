@@ -9,12 +9,12 @@ public abstract class OctagramHitbox: RectangleHitbox
 
     private readonly int _radius;
     
-    protected OctagramHitbox(Point position,int radius): base(position,(int)Math.Round(radius * RadiusMultiplier),(int)Math.Round(radius * RadiusMultiplier))
+    protected OctagramHitbox(Vector2 position,int radius): base(position,(int)Math.Round(radius * RadiusMultiplier),(int)Math.Round(radius * RadiusMultiplier))
     {
         _radius = radius;
     }
 
-    public override bool Intersects(Point point)
+    public override bool Intersects(Vector2 point)
     {
         return Math.Abs(Position.X - point.X) + Math.Abs(Position.Y - point.Y) <= _radius || base.Intersects(point);
     }

@@ -18,6 +18,6 @@ public class TestPopup: Popup
 
     public override void Draw(GameTime gameTime)
     {
-        SpriteBatch.Draw(Textures.HomeScreen.Lan, Box, Color.White);
+        SpriteBatch.Draw(Textures.General.Lan, Box, Color.White);
     }
 }

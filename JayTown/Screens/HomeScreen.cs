@@ -2,6 +2,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using JayTown.GameTextures;
 using System;
+using JayTown.Screens.WorldScreens;
 using Microsoft.Xna.Framework.Input;
 
 namespace JayTown.Screens;
@@ -14,7 +15,7 @@ public class HomeScreen: FullScreen
     public HomeScreen(ScreenManager manager,SpriteBatch spriteBatch): base(manager,spriteBatch)
     {
         _number = 0;
-        _text = new TextPopup(manager, spriteBatch, new Rectangle(300, 300, 100, 100),Textures.General.Font,"Test textbox",Color.White);
+        _text = new TextPopup(manager, spriteBatch, new Rectangle(200, 600, 500, 100),Textures.General.Font,"Press [ENTER] to play",Color.White,(float)1);
     }
 
     public override void Update(GameTime gameTime)
@@ -35,6 +36,11 @@ public class HomeScreen: FullScreen
         if (Game1.IsKeyPressed(Keys.C))
         {
             ScreenManager.ClearForeground();
+        }
+
+        if (Game1.IsKeyPressed(Keys.Enter))
+        {
+            ScreenManager.ClearAll(new Spawn(ScreenManager,SpriteBatch));
         }
 
         Game1.UpdateKb();

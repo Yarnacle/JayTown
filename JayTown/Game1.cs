@@ -51,7 +51,7 @@ public class Game1 : Game
 
     protected override void Draw(GameTime gameTime)
     {
-        _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, RasterizerState.CullCounterClockwise);
+        _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointWrap, DepthStencilState.None, RasterizerState.CullCounterClockwise);
 
         _screenManager.Draw(gameTime);
         _spriteBatch.End();
