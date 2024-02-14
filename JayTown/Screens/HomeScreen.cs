@@ -15,7 +15,7 @@ public class HomeScreen: FullScreen
     public HomeScreen(ScreenManager manager,SpriteBatch spriteBatch): base(manager,spriteBatch)
     {
         _number = 0;
-        _text = new TextPopup(manager, spriteBatch, new Rectangle(200, 600, 500, 100),Textures.General.Font,"Press [ENTER] to play",Color.White,(float)1);
+        _text = new TextPopup(manager, spriteBatch, new Rectangle(200, 600, 600, 100),Textures.General.Font,"Press [ENTER] to play",Color.Black,1,50,Textures.General.SolidColor);
     }
 
     public override void Update(GameTime gameTime)
@@ -51,5 +51,4 @@ public class HomeScreen: FullScreen
         SpriteBatch.Draw(Textures.HomeScreen.Background,FullScreen.Box,Color.White);
         _text.Draw(gameTime);
     }
-    
 }
