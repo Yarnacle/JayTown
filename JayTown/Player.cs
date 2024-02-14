@@ -8,6 +8,8 @@ namespace JayTown;
 
 public class Player: RectangleHitbox
 {
+    private SpriteBatch _spriteBatch;
+    
     private const float QuarterRotation = (float) Math.PI / 2;
 
     private static Texture2D _texture;
@@ -19,13 +21,14 @@ public class Player: RectangleHitbox
 
     private bool _horizontalFlip;
     
-    public Player(Texture2D texture, Vector2 position, int width, int height): base(position,width,height)
+    public Player(SpriteBatch spriteBatch,Texture2D texture, Vector2 position, int width, int height): base(position,width,height)
     {
-        Player._texture = texture; //load this better
+        _texture = texture;
         _width = width;
         _height = height;
         _velocity = new Vector2(0,0);
         _rotation = 0f;
+        _spriteBatch = spriteBatch;
     }
     public void Update(GameTime gameTime)
     {
@@ -41,24 +44,32 @@ public class Player: RectangleHitbox
 
         if (Game1.IsKeyDown(Keys.A))
         {
-            _horizontalFlip = true;
             _velocity.X += -_speed;
         }
 
         if (Game1.IsKeyDown(Keys.D))
         {
-            _horizontalFlip = false;
             _velocity.X += _speed;
         }
+
+        if (_velocity.X < 0)
+        {
+            _horizontalFlip = true;
+        }
+        else if (_velocity.X > 0)
+        {
+            _horizontalFlip = false;
+        }
+        
         Position += _velocity;
         _velocity.X = 0;
         _velocity.Y = 0;
         
         Game1.UpdateKb();
     }
-    public void Draw(SpriteBatch spriteBatch, GameTime gameTime)
+    public void Draw(GameTime gameTime)
     {
-        spriteBatch.Draw(_texture, new Rectangle((int)Position.X, (int)Position.Y, _width, _height), new Rectangle(0, 0, _texture.Width, _texture.Height), Color.White, _rotation, new Vector2(_texture.Width / 2, _texture.Height / 2), _horizontalFlip ? SpriteEffects.FlipHorizontally:SpriteEffects.None, 0);
+        _spriteBatch.Draw(_texture, new Rectangle((int)Position.X, (int)Position.Y, _width, _height), new Rectangle(0, 0, _texture.Width, _texture.Height), Color.White, _rotation, new Vector2(_texture.Width / 2, _texture.Height / 2), _horizontalFlip ? SpriteEffects.FlipHorizontally:SpriteEffects.None, 0);
     }
 
 }
