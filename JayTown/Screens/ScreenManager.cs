@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using JayTown.GameTextures;
 using Microsoft.Xna.Framework;
@@ -24,6 +25,7 @@ public void Update(GameTime gameTime)
         {
             screen.Update(gameTime);
         }
+        Game1.UpdateKb();
     }
 
     public void Draw(GameTime gameTime)
@@ -54,10 +56,9 @@ public void Update(GameTime gameTime)
     {
         _foreground.Clear();
     }
-    public void ClearAll(FullScreen newBackground)
+    public void SetBackgroud(FullScreen background)
     {
-        _background = newBackground;
-        _foreground.Clear();
+        _background = background;
     }
 
     public void Remove(Screen screen)

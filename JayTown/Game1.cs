@@ -36,7 +36,7 @@ public class Game1 : Game
 
         Textures.Load(GraphicsDevice,Content);
         _screenManager = new ScreenManager(_spriteBatch);
-        _screenManager.ClearAll(new HomeScreen(_screenManager,_spriteBatch));
+        _screenManager.SetBackgroud(new HomeScreen(_screenManager,_spriteBatch));
     }
 
     protected override void Update(GameTime gameTime)

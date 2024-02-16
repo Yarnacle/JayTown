@@ -40,10 +40,9 @@ public class HomeScreen: FullScreen
 
         if (Game1.IsKeyPressed(Keys.Enter))
         {
-            ScreenManager.ClearAll(new Spawn(ScreenManager,SpriteBatch));
+            ScreenManager.ClearForeground();
+            ScreenManager.SetBackgroud(new Spawn(ScreenManager,SpriteBatch));
         }
-
-        Game1.UpdateKb();
     }
 
     public override void Draw(GameTime gameTime)
