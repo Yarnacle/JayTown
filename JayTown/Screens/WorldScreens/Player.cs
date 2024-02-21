@@ -22,13 +22,20 @@ public class Player: Tile
     private static Texture2D _texture;
 
     private bool _horizontalFlip;
+    private bool _paralyzed;
     
     public Player(ScreenManager manager,SpriteBatch spriteBatch,Texture2D texture, Point gridPosition): base(manager,spriteBatch,gridPosition,Color.Gray)
     {
+        _paralyzed = false;
         _moveDirection = Direction.None;
         _spriteBatch = spriteBatch;
         _destination = GridPosition;
         _texture = texture;
+    }
+
+    public void SetParalyzed(bool paralyzed)
+    {
+        _paralyzed = paralyzed;
     }
     public void SetWorld(World world)
     {
@@ -83,6 +90,11 @@ public class Player: Tile
                 _moveDirection = Direction.None;
             }
 
+            return;
+        }
+        
+        if (_paralyzed)
+        {
             return;
         }
         if (Game1.IsKeyDown(Keys.W) || Game1.IsKeyDown(Keys.S))

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using JayTown.Screens.WorldScreens.NPCs;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -7,6 +8,7 @@ namespace JayTown.Screens.WorldScreens;
 public abstract class World: FullScreen
 {
     protected bool IsRunning;
+    protected List<Npc> NPCs;
     
     protected Dictionary<Point,string> Exits;
     private static readonly List<Color> BarrierColors = new() {Color.Red};
@@ -17,6 +19,7 @@ public abstract class World: FullScreen
 
     protected World(ScreenManager manager, SpriteBatch spriteBatch, Texture2D background,Dictionary<Point,string> exits) : base(manager,spriteBatch)
     {
+        NPCs = new List<Npc>();
         Player = null;
         Exits = exits;
         var pixelMap = new Color[background.Width * background.Height];
@@ -91,6 +94,15 @@ public abstract class World: FullScreen
         if (BarrierColors.Contains(Tiles[gridPosition.Y][gridPosition.X].GetColor()))
         {
             return false;
+        }
+
+        foreach (var npc in NPCs)
+        {
+            if (npc.GetGridPosition() == gridPosition)
+            {
+                npc.InitiateDialogue();
+                return false;
+            }
         }
 
         return true;

@@ -32,6 +32,7 @@ public static class Textures
         General.SheriffJay = LoadTile("General/SheriffJay.png", Color.Gray);
         General.MayorJay = LoadTile("General/MayorJay.png", Color.Maroon);
         General.DialogueBox = Load("General/DialogueBox.png");
+        General.NextArrow = Load("General/NextArrow.png");
 
         PixelMaps.Spawn = Load("PixelMaps/Spawn.png");
         PixelMaps.World2 = Load("PixelMaps/World2.png");

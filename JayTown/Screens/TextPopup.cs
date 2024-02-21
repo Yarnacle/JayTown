@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 using JayTown.GameTextures;
 using Microsoft.Xna.Framework;
@@ -8,6 +9,7 @@ namespace JayTown.Screens;
 public class TextPopup: Popup
 {
     protected string Text;
+    protected string WrappedText;
     protected readonly SpriteFont Font;
     protected Color Color;
     protected float Scale;
@@ -22,12 +24,14 @@ public class TextPopup: Popup
         Scale = scale;
         Padding = padding;
         Background = background;
+        UpdateWrapped();
     }
 
     public override void Draw(GameTime gameTime)
     {
         SpriteBatch.Draw(Background,Box,Color.White);
-        SpriteBatch.DrawString(Font,WrappedText(),new Vector2(Box.X + Padding,Box.Y + Padding),Color,0,new Vector2(0,0),Scale,SpriteEffects.None,0);
+        // SpriteBatch.Draw(Textures.General.SolidColor,new Rectangle(Box.X + Padding,Box.Y + Padding,Box.Width - 2 * Padding,Box.Height - 2 * Padding),Color.Gray);
+        SpriteBatch.DrawString(Font,WrappedText,new Vector2(Box.X + Padding,Box.Y + Padding),Color,0,new Vector2(0,0),Scale,SpriteEffects.None,0);
     }
 
     public override void Update(GameTime gameTime)
@@ -39,20 +43,26 @@ public class TextPopup: Popup
     {
         Color = color;
     }
+
+    public void SetText(string text)
+    {
+        Text = text;
+        UpdateWrapped();
+    }
     
-    private string WrappedText()
+    private void UpdateWrapped()
     {
         var width = Box.Width - Padding * 2;
         if(Font.MeasureString(Text).X < width) {
-            return Text;
+            WrappedText = Text;
         }
         var words = Text.Split(' ');
         var wrappedText = new StringBuilder();
         var lineWidth = 0f;
-        var spaceWidth = Font.MeasureString(" ").X;
+        var spaceWidth = Font.MeasureString(" ").X * Scale;
         foreach (var t in words)
         {
-            var size = Font.MeasureString(t);
+            var size = Font.MeasureString(t) * Scale;
             if (lineWidth + size.X < width) {
                 lineWidth += size.X + spaceWidth;
             } else {
@@ -63,6 +73,6 @@ public class TextPopup: Popup
             wrappedText.Append(' ');
         }
 
-        return wrappedText.ToString();
+        WrappedText = wrappedText.ToString();
     }
 }

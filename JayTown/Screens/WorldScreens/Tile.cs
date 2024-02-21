@@ -35,7 +35,7 @@ public class Tile: Popup
         return tile.GetGridPosition() == GridPosition;
     }
 
-    private Point GetGridPosition()
+    public Point GetGridPosition()
     {
         return GridPosition;
     }
