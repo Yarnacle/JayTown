@@ -25,11 +25,13 @@ public class Player: Tile
     private bool _horizontalFlip;
     private bool _paralyzed;
     private bool _drawn;
-    private List<Bullet> _bullets;
+    private readonly List<Bullet> _bullets;
+    private readonly List<Boom> _booms;
     
     public Player(ScreenManager manager,SpriteBatch spriteBatch,Texture2D texture, Point gridPosition): base(manager,spriteBatch,gridPosition,Color.Gray)
     {
         _bullets = new List<Bullet>();
+        _booms = new List<Boom>();
         _paralyzed = false;
         _drawn = false;
         _moveDirection = Direction.None;
@@ -49,6 +51,8 @@ public class Player: Tile
     }
     public void SetWorld(World world)
     {
+        _bullets.Clear();
+        _booms.Clear();
         _world = world;
         switch (_moveDirection)
         {
@@ -82,6 +86,7 @@ public class Player: Tile
             if (bulletPosition.X > 1000 || bulletPosition.X < 0 || bulletPosition.Y > 1000 || bulletPosition.Y < 0)
             {
                 _bullets.RemoveAt(i);
+                _booms.Add(new Boom(SpriteBatch,bulletPosition));
             }
 
             var tiles = _world.GetTiles(); 
@@ -92,6 +97,7 @@ public class Player: Tile
                     if (World.BarrierColors.Contains(tile.GetColor()) && tile.GetBox().Contains(bulletPosition))
                     {
                         _bullets.RemoveAt(i);
+                        _booms.Add(new Boom(SpriteBatch,bulletPosition));
                     }
                 }
             }
@@ -102,6 +108,7 @@ public class Player: Tile
                 if (npc.GetBox().Contains(bulletPosition))
                 {
                     _bullets.RemoveAt(i);
+                    _booms.Add(new Boom(SpriteBatch,bulletPosition));
                 }
             }
         }
@@ -204,6 +211,18 @@ public class Player: Tile
         foreach (var bullet in _bullets)
         {
             bullet.Draw(gameTime);
+        }
+        
+        for (var i = _booms.Count - 1; i >= 0; i--)
+        {
+            if (_booms[i].IsDone())
+            {
+                _booms.RemoveAt(i);
+            }
+            else
+            {
+                _booms[i].Draw(gameTime);
+            }
         }
     }
 }

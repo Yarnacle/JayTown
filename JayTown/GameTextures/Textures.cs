@@ -32,6 +32,8 @@ public static class Textures
         General.SheriffJay = LoadTile("General/SheriffJay.png", Color.Gray);
         General.Gun = Load("General/Gun.png");
         General.Bullet = Load("General/Bullet.png");
+        General.Boom1 = Load("General/Boom1.png");
+        General.Boom2 = Load("General/Boom2.png");
         General.MayorJay = LoadTile("General/MayorJay.png", Color.Maroon);
         General.DialogueBox = Load("General/DialogueBox.png");
         General.NextArrow = Load("General/NextArrow.png");
