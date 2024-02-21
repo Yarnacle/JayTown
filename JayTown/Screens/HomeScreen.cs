@@ -15,7 +15,7 @@ public class HomeScreen: FullScreen
     public HomeScreen(ScreenManager manager,SpriteBatch spriteBatch): base(manager,spriteBatch)
     {
         _number = 0;
-        _text = new TextPopup(manager, spriteBatch, new Rectangle(200, 600, 600, 100),Textures.General.Font,"Press [ENTER] to play",Color.Black,1,50,Textures.General.SolidColor);
+        _text = new TextPopup(manager, spriteBatch, new Rectangle(200, 600, 600, 100),Textures.General.Font,"Press [ENTER] to play",Color.Black,1,50,Textures.General.Transparent);
     }
 
     public override void Update(GameTime gameTime)
@@ -41,7 +41,7 @@ public class HomeScreen: FullScreen
         if (Game1.IsKeyPressed(Keys.Enter))
         {
             ScreenManager.ClearForeground();
-            ScreenManager.Worlds["Spawn"].Enter(new Player(ScreenManager,SpriteBatch, Textures.General.Lan,new Point(5, 5)));
+            ScreenManager.Worlds["Spawn"].Enter(new Player(ScreenManager,SpriteBatch, Textures.General.SheriffJay,new Point(5, 5)));
             ScreenManager.SetBackgroud(ScreenManager.Worlds["Spawn"]);
         }
     }

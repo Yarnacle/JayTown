@@ -17,6 +17,7 @@ public static class Textures
     public static readonly dynamic HomeScreen = new ExpandoObject();
     public static readonly dynamic General = new ExpandoObject();
     public static readonly dynamic PixelMaps = new ExpandoObject();
+    public static readonly dynamic MaterialTiles = new ExpandoObject();
     
     public static void Load(GraphicsDevice graphicsDevice,ContentManager content)
     {
@@ -24,14 +25,20 @@ public static class Textures
         
         // Textures
         General.SolidColor = LoadTile("General/SolidColor.png",Color.White);
+        General.Transparent = LoadTile("General/Transparent.png", Color.Transparent);
         General.ClearScreen = Load("General/ClearScreen.png");
         General.Font = LoadFont(content,"PixelFont");
         General.Lan = LoadTile("HomeScreen/Lan.png",Color.Red);
+        General.SheriffJay = LoadTile("General/SheriffJay.png", Color.Gray);
+        General.MayorJay = LoadTile("General/MayorJay.png", Color.Maroon);
+        General.DialogueBox = Load("General/DialogueBox.png");
 
         PixelMaps.Spawn = Load("PixelMaps/Spawn.png");
         PixelMaps.World2 = Load("PixelMaps/World2.png");
         
         HomeScreen.Background = Load("HomeScreen/Background.png");
+
+        MaterialTiles.WoodPlank = LoadTile("MaterialTiles/WoodPlank.png",Color.Orange);
     }
 
     private static Texture2D Load(string path)

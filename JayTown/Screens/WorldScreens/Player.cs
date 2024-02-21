@@ -23,7 +23,7 @@ public class Player: Tile
 
     private bool _horizontalFlip;
     
-    public Player(ScreenManager manager,SpriteBatch spriteBatch,Texture2D texture, Point gridPosition): base(manager,spriteBatch,gridPosition,Color.Transparent)
+    public Player(ScreenManager manager,SpriteBatch spriteBatch,Texture2D texture, Point gridPosition): base(manager,spriteBatch,gridPosition,Color.Gray)
     {
         _moveDirection = Direction.None;
         _spriteBatch = spriteBatch;
@@ -134,7 +134,12 @@ public class Player: Tile
     }
     public override void Draw(GameTime gameTime)
     {
-        _spriteBatch.Draw(Textures.General.SolidColor,new Rectangle(_destination.X * 100,_destination.Y * 100,100,100),Color.Gray);
+        // if (_destination != GridPosition)
+        // {
+        //     _spriteBatch.Draw(Textures.General.SolidColor,
+        //         new Rectangle(_destination.X * 100, _destination.Y * 100, 100, 100), new Color(Color.Gray, .4f));
+        // }
+
         _spriteBatch.Draw(_texture, Box, new Rectangle(0, 0, _texture.Width,_texture.Height), Color.White, 0, new Vector2(0,0), _horizontalFlip ? SpriteEffects.FlipHorizontally:SpriteEffects.None, 0);
     }
 }
