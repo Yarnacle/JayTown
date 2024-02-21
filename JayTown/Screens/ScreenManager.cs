@@ -24,7 +24,9 @@ public class ScreenManager
         Worlds = new Dictionary<string, World>()
         {
             { "Spawn", new Spawn(this, spriteBatch) },
-            { "World2", new SpawnEntrance(this, spriteBatch) }
+            {"SpawnEntrance",new SpawnEntrance(this,spriteBatch)},
+            {"FarmCorner",new FarmCorner(this,spriteBatch)},
+            {"PathToHouse",new PathToHouse(this,spriteBatch)}
         };
     }
 

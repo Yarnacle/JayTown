@@ -13,7 +13,12 @@ public class SpawnEntrance: World
         {
             { new Point(10, 4), "Spawn" },
             { new Point(10, 5), "Spawn" },
-            { new Point(10,1),"Spawn"}
+            {new Point(2,-1),"FarmCorner"},
+            {new Point(3,-1),"FarmCorner"},
+            {new Point(4,-1),"FarmCorner"},
+            {new Point(2,10),"PathToHouse"},
+            {new Point(3,10),"PathToHouse"},
+            {new Point(4,10),"PathToHouse"}
         })
     {
         

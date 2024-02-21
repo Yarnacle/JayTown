@@ -30,7 +30,9 @@ public static class Textures
         General.ClearScreen = Load("General/ClearScreen.png");
         General.Font = LoadFont(content,"PixelFont");
         General.Lan = LoadTile("HomeScreen/Lan.png",Color.Red);
+        
         General.SheriffJay = LoadTile("General/SheriffJay.png", Color.Gray);
+        General.DestinationShadow = LoadTile("General/DestinationShadow.png", Color.LightGray);
         General.Gun = Load("General/Gun.png");
         General.Bullet = Load("General/Bullet.png");
         General.Boom1 = Load("General/Boom1.png");
@@ -40,8 +42,9 @@ public static class Textures
 
 
         PixelMaps.Spawn = Load("PixelMaps/Spawn.png");
-        PixelMaps.World2 = Load("PixelMaps/World2.png");
         PixelMaps.SpawnEntrance = Load("PixelMaps/SpawnEntrance.png");
+        PixelMaps.FarmCorner = Load("PixelMaps/FarmCorner.png");
+        PixelMaps.PathToHouse = Load("PixelMaps/PathToHouse.png");
         
         HomeScreen.Background = Load("HomeScreen/Background.png");
 
@@ -51,9 +54,10 @@ public static class Textures
         MaterialTiles.Bark = LoadTile("MaterialTiles/Bark.png", Color.Brown);
         MaterialTiles.Farmland = LoadTile("MaterialTiles/Farmland.png", Color.GreenYellow);
         MaterialTiles.Grass = LoadTile("MaterialTiles/Grass.png", Color.Green);
-        // MaterialTiles.Ice = LoadTile("MaterialTiles/Ice.png", Color.LightBlue);
+        MaterialTiles.Ice = LoadTile("MaterialTiles/Ice.png", Color.LightBlue);
         MaterialTiles.WhiteTile = LoadTile("MaterialTiles/WhiteTile.png", Color.WhiteSmoke);
         MaterialTiles.Water = LoadTile("MaterialTiles/Water.png", Color.Blue);
+        MaterialTiles.Wall = LoadTile("MaterialTiles/Wall.png", Color.SlateGray);
 
         NPCs.MayorJay = LoadTile("NPCs/MayorJay.png", Color.Maroon);
         NPCs.GangLeader = LoadTile("NPCs/GangLeader.png", Color.Yellow);

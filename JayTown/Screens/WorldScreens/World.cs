@@ -12,9 +12,10 @@ public abstract class World: FullScreen
     protected List<Npc> NPCs;
     
     protected Dictionary<Point,string> Exits;
-    public static readonly List<Color> BarrierColors = new() {Color.Red,Color.Blue};
+    public static readonly List<Color> BarrierColors = new() {Color.Red,Color.Brown};
+    public static readonly List<Color> VoidColors = new() { Color.Blue };
 
-    protected Tile[][] Tiles;
+    protected readonly Tile[][] Tiles;
 
     protected Player Player;
 
@@ -100,7 +101,7 @@ public abstract class World: FullScreen
             return false;
         }
 
-        if (BarrierColors.Contains(Tiles[gridPosition.Y][gridPosition.X].GetColor()))
+        if (BarrierColors.Contains(Tiles[gridPosition.Y][gridPosition.X].GetColor()) || VoidColors.Contains(Tiles[gridPosition.Y][gridPosition.X].GetColor()))
         {
             return false;
         }
