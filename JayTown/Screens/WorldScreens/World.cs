@@ -12,7 +12,7 @@ public abstract class World: FullScreen
     protected List<Npc> NPCs;
     
     protected Dictionary<Point,string> Exits;
-    public static readonly List<Color> BarrierColors = new() {Color.Red};
+    public static readonly List<Color> BarrierColors = new() {Color.Red,Color.Blue};
 
     protected Tile[][] Tiles;
 

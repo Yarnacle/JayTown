@@ -18,6 +18,7 @@ public static class Textures
     public static readonly dynamic General = new ExpandoObject();
     public static readonly dynamic PixelMaps = new ExpandoObject();
     public static readonly dynamic MaterialTiles = new ExpandoObject();
+    public static readonly dynamic NPCs = new ExpandoObject();
     
     public static void Load(GraphicsDevice graphicsDevice,ContentManager content)
     {
@@ -34,17 +35,28 @@ public static class Textures
         General.Bullet = Load("General/Bullet.png");
         General.Boom1 = Load("General/Boom1.png");
         General.Boom2 = Load("General/Boom2.png");
-        General.MayorJay = LoadTile("General/MayorJay.png", Color.Maroon);
         General.DialogueBox = Load("General/DialogueBox.png");
         General.NextArrow = Load("General/NextArrow.png");
 
 
         PixelMaps.Spawn = Load("PixelMaps/Spawn.png");
         PixelMaps.World2 = Load("PixelMaps/World2.png");
+        PixelMaps.SpawnEntrance = Load("PixelMaps/SpawnEntrance.png");
         
         HomeScreen.Background = Load("HomeScreen/Background.png");
 
         MaterialTiles.WoodPlank = LoadTile("MaterialTiles/WoodPlank.png",Color.Orange);
+        MaterialTiles.Cobblestone = LoadTile("MaterialTiles/Cobblestone.png",Color.DarkGray);
+        MaterialTiles.Dirt = LoadTile("MaterialTiles/Dirt.png", Color.RosyBrown);
+        MaterialTiles.Bark = LoadTile("MaterialTiles/Bark.png", Color.Brown);
+        MaterialTiles.Farmland = LoadTile("MaterialTiles/Farmland.png", Color.GreenYellow);
+        MaterialTiles.Grass = LoadTile("MaterialTiles/Grass.png", Color.Green);
+        // MaterialTiles.Ice = LoadTile("MaterialTiles/Ice.png", Color.LightBlue);
+        MaterialTiles.WhiteTile = LoadTile("MaterialTiles/WhiteTile.png", Color.WhiteSmoke);
+        MaterialTiles.Water = LoadTile("MaterialTiles/Water.png", Color.Blue);
+
+        NPCs.MayorJay = LoadTile("NPCs/MayorJay.png", Color.Maroon);
+        NPCs.GangLeader = LoadTile("NPCs/GangLeader.png", Color.Yellow);
     }
 
     private static Texture2D Load(string path)

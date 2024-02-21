@@ -39,9 +39,4 @@ public class Tile: Popup
     {
         return Color;
     }
-
-    public Rectangle GetBox()
-    {
-        return new Rectangle(GridPosition.X * 100, GridPosition.Y * 100, 100, 100);
-    }
 }
