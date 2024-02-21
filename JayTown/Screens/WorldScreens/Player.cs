@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using JayTown.GameTextures;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -8,7 +9,7 @@ namespace JayTown.Screens.WorldScreens;
 
 public class Player: Tile
 {
-    private enum Direction {None,Up,Down,Left,Right}
+    public enum Direction {None,Up,Down,Left,Right}
     
     private readonly SpriteBatch _spriteBatch;
     private World _world;
@@ -22,14 +23,39 @@ public class Player: Tile
 
     private bool _horizontalFlip;
     
-    public Player(ScreenManager manager,World world,SpriteBatch spriteBatch,Texture2D texture, Point gridPosition): base(manager,spriteBatch,gridPosition,Color.Transparent)
+    public Player(ScreenManager manager,SpriteBatch spriteBatch,Texture2D texture, Point gridPosition): base(manager,spriteBatch,gridPosition,Color.Transparent)
     {
         _moveDirection = Direction.None;
         _spriteBatch = spriteBatch;
         _destination = GridPosition;
         _texture = texture;
-        _world = world;
     }
+    public void SetWorld(World world)
+    {
+        _world = world;
+        switch (_moveDirection)
+        {
+            case Direction.Down:
+                GridPosition.Y = -1;
+                _destination.Y = 0;
+                break;
+            case Direction.Up:
+                GridPosition.Y = 10;
+                _destination.Y = 9;
+                break;
+            case Direction.Left:
+                GridPosition.X = 10;
+                _destination.X = 9;
+                break;
+            case Direction.Right:
+                GridPosition.X = -1;
+                _destination.X = 0;
+                break;
+        }
+        Box.X = GridPosition.X * 100;
+        Box.Y = GridPosition.Y * 100;
+    }
+    
     public override void Update(GameTime gameTime)
     {
         if (_moveDirection != Direction.None)

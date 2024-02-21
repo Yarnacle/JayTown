@@ -41,7 +41,8 @@ public class HomeScreen: FullScreen
         if (Game1.IsKeyPressed(Keys.Enter))
         {
             ScreenManager.ClearForeground();
-            ScreenManager.SetBackgroud(new Spawn(ScreenManager,SpriteBatch));
+            ScreenManager.Worlds["Spawn"].Enter(new Player(ScreenManager,SpriteBatch, Textures.General.Lan,new Point(5, 5)));
+            ScreenManager.SetBackgroud(ScreenManager.Worlds["Spawn"]);
         }
     }
 

@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using JayTown.GameTextures;
+using JayTown.Screens.WorldScreens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -12,19 +14,35 @@ public class ScreenManager
     private FullScreen _background;
     private readonly List<Screen> _foreground;
 
+    public readonly Dictionary<string,World> Worlds;
+
     public ScreenManager(SpriteBatch spriteBatch)
     {
         _spriteBatch = spriteBatch;
         _foreground = new List<Screen>();
+
+        Worlds = new Dictionary<string, World>()
+        {
+            { "Spawn", new Spawn(this, spriteBatch) },
+            { "World2", new World2(this, spriteBatch) }
+        };
     }
 
 public void Update(GameTime gameTime)
     {
         _background.Update(gameTime);
-        foreach (var screen in _foreground)
+        try
         {
-            screen.Update(gameTime);
+            foreach (var screen in _foreground)
+            {
+                screen.Update(gameTime);
+            }
         }
+        catch
+        {
+            return;
+        }
+
         Game1.UpdateKb();
     }
 

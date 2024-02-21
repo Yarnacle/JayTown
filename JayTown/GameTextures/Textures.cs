@@ -29,6 +29,7 @@ public static class Textures
         General.Lan = LoadTile("HomeScreen/Lan.png",Color.Red);
 
         PixelMaps.Spawn = Load("PixelMaps/Spawn.png");
+        PixelMaps.World2 = Load("PixelMaps/World2.png");
         
         HomeScreen.Background = Load("HomeScreen/Background.png");
     }
