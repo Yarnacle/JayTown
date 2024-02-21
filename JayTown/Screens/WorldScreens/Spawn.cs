@@ -19,14 +19,14 @@ public class Spawn : World
             {new Point(-1,1),"World2"}
         })
     {
+        MJ = new MayorJay(ScreenManager,SpriteBatch);
+        NPCs.Add(MJ);
     }
 
     public override void Enter(Player player)
     {
         base.Enter(player);
-        MJ = new MayorJay(ScreenManager,SpriteBatch,Player);
-        NPCs.Add(MJ);
-        ScreenManager.Add(MJ);
+        player.SetDrawn(true);
     }
 
     public override void Draw(GameTime gameTime)

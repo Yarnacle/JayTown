@@ -22,15 +22,19 @@ public abstract class Npc: Tile
     protected List<Tuple<Color,string>> Dialogue;
     protected State DialogueState;
     
-    protected Npc(ScreenManager manager,SpriteBatch spriteBatch,Color color,List<Tuple<Color,string>> dialogue,Player player): base(manager,spriteBatch,new Point(6,4),color)
+    protected Npc(ScreenManager manager,SpriteBatch spriteBatch,Color color,List<Tuple<Color,string>> dialogue): base(manager,spriteBatch,new Point(6,4),color)
     {
-        Player = player;
         DialogueState = State.Before;
         Dialogue = dialogue;
         _dialogueIndex = 0;
         // TextColor = textColor;
         DialogueBox = new TextPopup(manager, spriteBatch, new Rectangle(0, 750, 1000, 250), Textures.General.Font,
             Dialogue[0].Item2, Dialogue[0].Item1, .6f, 60, Textures.General.DialogueBox);
+    }
+
+    public void SetPlayer(Player player)
+    {
+        Player = player;
     }
 
     public virtual void InitiateDialogue()

@@ -30,11 +30,6 @@ public class Tile: Popup
         Color = color;
     }
 
-    public bool Intersects(Tile tile)
-    {
-        return tile.GetGridPosition() == GridPosition;
-    }
-
     public Point GetGridPosition()
     {
         return GridPosition;
@@ -43,5 +38,10 @@ public class Tile: Popup
     public Color GetColor()
     {
         return Color;
+    }
+
+    public Rectangle GetBox()
+    {
+        return new Rectangle(GridPosition.X * 100, GridPosition.Y * 100, 100, 100);
     }
 }

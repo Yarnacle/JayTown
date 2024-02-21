@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using JayTown.Screens.WorldScreens.NPCs;
 using Microsoft.Xna.Framework;
@@ -11,7 +12,7 @@ public abstract class World: FullScreen
     protected List<Npc> NPCs;
     
     protected Dictionary<Point,string> Exits;
-    private static readonly List<Color> BarrierColors = new() {Color.Red};
+    public static readonly List<Color> BarrierColors = new() {Color.Red};
 
     protected Tile[][] Tiles;
 
@@ -51,12 +52,22 @@ public abstract class World: FullScreen
         
         Player = player;
         Player.SetWorld(this);
+        foreach (var npc in NPCs)
+        {
+            npc.SetPlayer(player);
+            ScreenManager.Add(npc); 
+        }
+        
         ScreenManager.Add(Player);
         IsRunning = true;
     }
 
     private void Exit(World world)
     {
+        foreach (var npc in NPCs)
+        {
+            npc.SetPlayer(null);
+        }
         ScreenManager.SetBackgroud(world);
         ScreenManager.ClearForeground();
         IsRunning = false;
@@ -70,8 +81,6 @@ public abstract class World: FullScreen
         {
             return;
         }
-
-        Player.Update(gameTime);
     }
 
     public override void Draw(GameTime gameTime)
@@ -106,5 +115,15 @@ public abstract class World: FullScreen
         }
 
         return true;
+    }
+
+    public Tile[][] GetTiles()
+    {
+        return Tiles;
+    }
+
+    public List<Npc> GetNPCs()
+    {
+        return NPCs;
     }
 }

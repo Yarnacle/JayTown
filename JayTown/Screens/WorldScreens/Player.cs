@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using JayTown.GameTextures;
 using Microsoft.Xna.Framework;
@@ -23,10 +24,14 @@ public class Player: Tile
 
     private bool _horizontalFlip;
     private bool _paralyzed;
+    private bool _drawn;
+    private List<Bullet> _bullets;
     
     public Player(ScreenManager manager,SpriteBatch spriteBatch,Texture2D texture, Point gridPosition): base(manager,spriteBatch,gridPosition,Color.Gray)
     {
+        _bullets = new List<Bullet>();
         _paralyzed = false;
+        _drawn = false;
         _moveDirection = Direction.None;
         _spriteBatch = spriteBatch;
         _destination = GridPosition;
@@ -36,6 +41,11 @@ public class Player: Tile
     public void SetParalyzed(bool paralyzed)
     {
         _paralyzed = paralyzed;
+    }
+
+    public void SetDrawn(bool drawn)
+    {
+        _drawn = drawn;
     }
     public void SetWorld(World world)
     {
@@ -65,9 +75,46 @@ public class Player: Tile
     
     public override void Update(GameTime gameTime)
     {
+        for (var i = _bullets.Count - 1; i >= 0; i--)
+        {
+            _bullets[i].Update(gameTime);
+            var bulletPosition = _bullets[i].GetPosition();
+            if (bulletPosition.X > 1000 || bulletPosition.X < 0 || bulletPosition.Y > 1000 || bulletPosition.Y < 0)
+            {
+                _bullets.RemoveAt(i);
+            }
+
+            var tiles = _world.GetTiles(); 
+            foreach (var row in tiles)
+            {
+                foreach (var tile in row)
+                {
+                    if (World.BarrierColors.Contains(tile.GetColor()) && tile.GetBox().Contains(bulletPosition))
+                    {
+                        _bullets.RemoveAt(i);
+                    }
+                }
+            }
+
+            var npcs = _world.GetNPCs();
+            foreach (var npc in npcs)
+            {
+                if (npc.GetBox().Contains(bulletPosition))
+                {
+                    _bullets.RemoveAt(i);
+                }
+            }
+        }
+        if (_drawn)
+        {
+            if (Game1.IsKeyPressed(Keys.Space))
+            {
+                _bullets.Add(new Bullet(SpriteBatch,_horizontalFlip ? -10:10,new Rectangle(Box.X - 50,Box.Y - 50,200,200)));
+            }
+        }
         if (_moveDirection != Direction.None)
         {
-            const int speed = 4;
+            const int speed = 5;
             switch (_moveDirection)
             {
                 case Direction.Down:
@@ -153,5 +200,10 @@ public class Player: Tile
         // }
 
         _spriteBatch.Draw(_texture, Box, new Rectangle(0, 0, _texture.Width,_texture.Height), Color.White, 0, new Vector2(0,0), _horizontalFlip ? SpriteEffects.FlipHorizontally:SpriteEffects.None, 0);
+        _spriteBatch.Draw(Textures.General.Gun,new Rectangle(Box.X - 50,Box.Y - 50,200,200),new Rectangle(0,0,Textures.General.Gun.Width,Textures.General.Gun.Height),Color.White,0,new Vector2(0,0),_horizontalFlip ? SpriteEffects.FlipHorizontally:SpriteEffects.None,0);
+        foreach (var bullet in _bullets)
+        {
+            bullet.Draw(gameTime);
+        }
     }
 }

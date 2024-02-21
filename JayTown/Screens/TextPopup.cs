@@ -30,7 +30,7 @@ public class TextPopup: Popup
     public override void Draw(GameTime gameTime)
     {
         SpriteBatch.Draw(Background,Box,Color.White);
-        // SpriteBatch.Draw(Textures.General.SolidColor,new Rectangle(Box.X + Padding,Box.Y + Padding,Box.Width - 2 * Padding,Box.Height - 2 * Padding),Color.Gray);
+        // SpriteBatch.Draw(Textures.General.SolidColor,new Rectangle(Box.X + Padding,Box.Y + Padding,Box.Width - 2 * Padding,Box.Height - 2 * Padding),Color.Yellow);
         SpriteBatch.DrawString(Font,WrappedText,new Vector2(Box.X + Padding,Box.Y + Padding),Color,0,new Vector2(0,0),Scale,SpriteEffects.None,0);
     }
 
@@ -53,26 +53,39 @@ public class TextPopup: Popup
     private void UpdateWrapped()
     {
         var width = Box.Width - Padding * 2;
-        if(Font.MeasureString(Text).X < width) {
+        if(Font.MeasureString(Text).X * Scale < width) {
             WrappedText = Text;
         }
-        var words = Text.Split(' ');
-        var wrappedText = new StringBuilder();
-        var lineWidth = 0f;
-        var spaceWidth = Font.MeasureString(" ").X * Scale;
-        foreach (var t in words)
-        {
-            var size = Font.MeasureString(t) * Scale;
-            if (lineWidth + size.X < width) {
-                lineWidth += size.X + spaceWidth;
-            } else {
-                wrappedText.Append('\n');
-                lineWidth = size.X + spaceWidth;
-            }
-            wrappedText.Append(t);
-            wrappedText.Append(' ');
-        }
 
-        WrappedText = wrappedText.ToString();
+        var lines = Text.Split('\n');
+        var wrappedLines = new StringBuilder();
+        foreach (var line in lines)
+        {
+            var words = line.Split(' ');
+            var wrappedText = new StringBuilder();
+            var lineWidth = 0f;
+            var spaceWidth = Font.MeasureString(" ").X * Scale;
+            foreach (var t in words)
+            {
+                var size = Font.MeasureString(t) * Scale;
+                if (lineWidth + size.X < width)
+                {
+                    lineWidth += size.X + spaceWidth;
+                }
+                else
+                {
+                    wrappedText.Append('\n');
+                    lineWidth = size.X + spaceWidth;
+                }
+
+                wrappedText.Append(t);
+                wrappedText.Append(' ');
+            }
+
+            wrappedLines.Append(wrappedText);
+            wrappedLines.Append('\n');
+        }
+        
+        WrappedText = wrappedLines.ToString();
     }
 }

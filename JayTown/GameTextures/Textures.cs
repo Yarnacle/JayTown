@@ -30,9 +30,12 @@ public static class Textures
         General.Font = LoadFont(content,"PixelFont");
         General.Lan = LoadTile("HomeScreen/Lan.png",Color.Red);
         General.SheriffJay = LoadTile("General/SheriffJay.png", Color.Gray);
+        General.Gun = Load("General/Gun.png");
+        General.Bullet = Load("General/Bullet.png");
         General.MayorJay = LoadTile("General/MayorJay.png", Color.Maroon);
         General.DialogueBox = Load("General/DialogueBox.png");
         General.NextArrow = Load("General/NextArrow.png");
+
 
         PixelMaps.Spawn = Load("PixelMaps/Spawn.png");
         PixelMaps.World2 = Load("PixelMaps/World2.png");
