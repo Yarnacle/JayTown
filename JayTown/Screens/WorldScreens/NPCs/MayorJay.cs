@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text.Encodings.Web;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -35,6 +36,10 @@ public class MayorJay: Npc
         else if (_plotProgress == 2)
         {
             ScreenManager.Worlds["FarmBend"].AddNPC(new Vorrow(ScreenManager,SpriteBatch,ScreenManager.Worlds["FarmBend"]));
+        }
+        else if (_plotProgress == 3)
+        {
+            ScreenManager.Worlds["CobbleRoad"].AddNPC(new Nav(ScreenManager,SpriteBatch,ScreenManager.Worlds["CobbleRoad"]));
         }
 
         _plotProgress++;

@@ -14,7 +14,9 @@ public class PathToHouse: World
             { new Point(3,-1), "SpawnEntrance" },
             {new Point(4,-1),"SpawnEntrance"},
             {new Point(5,10),"Cabin1"},
-            {new Point(6,10),"Cabin1"}
+            {new Point(6,10),"Cabin1"},
+            {new Point(-1,2),"CobbleRoad"},
+            {new Point(-1,3),"CobbleRoad"}
         },false)
     {
         

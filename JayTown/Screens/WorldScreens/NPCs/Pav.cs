@@ -13,12 +13,12 @@ public class Pav: Npc
     Color.DarkOrange, world, new List<Tuple<Color, string>>()
     {
         Tuple.Create(Color.White,"..."),
-        Tuple.Create(Color.DarkOrange, "Bro Chenny is such an op!"),
+        Tuple.Create(Color.DarkOrange,"Bro Chenny is such an opp!"),
         Tuple.Create(Color.LightGreen,"Sooo who forgot to file our taxes?"),
         Tuple.Create(Color.DarkOrange,"Sooooooo who pays for this house?"),
         Tuple.Create(Color.LightGreen,"Aight bro. You're only where you are today because of me."),
         Tuple.Create(Color.DarkOrange,"Nah nah nah, I carried you though college. YOU'RE where YOU are because of ME."),
-        Tuple.Create(Color.LightGreen,"Who kept giving you that lil calc plug?"),
+        Tuple.Create(Color.LightGreen,"Who kept giving you that lil physics plug?"),
         Tuple.Create(Color.DarkOrange,"Bro the sheriff can HEAR YOU."),
         Tuple.Create(Color.LightGreen,"YOU'RE THE ONE YELLING!"),
         Tuple.Create(Color.DarkOrange,"CALM YO ASS DOWN."),

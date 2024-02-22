@@ -50,6 +50,7 @@ public static class Textures
         PixelMaps.Cabin2 = Load("PixelMaps/Cabin2.png");
         PixelMaps.FarmRoad = Load("PixelMaps/FarmRoad.png");
         PixelMaps.FarmBend = Load("PixelMaps/FarmBend.png");
+        PixelMaps.CobbleRoad = Load("PixelMaps/CobbleRoad.png");
         
         HomeScreen.Background = Load("HomeScreen/Background.png");
 
@@ -68,11 +69,12 @@ public static class Textures
         NPCs.Death2 = LoadTile("NPCs/Death2.png", new Color(100,100,100));
         NPCs.Death3 = LoadTile("NPCs/Death3.png", new Color(50,50,50));
         NPCs.MayorJay = LoadTile("NPCs/MayorJay.png", Color.Maroon);
-        NPCs.GangLeader = LoadTile("NPCs/GangLeader.png", Color.Yellow);
+        NPCs.GangLeader = LoadTile("NPCs/Lain.png", Color.Yellow);
         NPCs.Robber = LoadTile("NPCs/Robber.png", Color.Purple);
         NPCs.Chenny = LoadTile("NPCs/Chenny.png", Color.LightGreen);
         NPCs.Pav = LoadTile("NPCs/Pav.png", Color.DarkOrange);
         NPCs.Vorrow = LoadTile("NPCs/Vorrow.png", Color.DarkGreen);
+        NPCs.Nav = LoadTile("NPCs/Nav.png", Color.Pink);
     }
 
     private static Texture2D Load(string path)

@@ -32,4 +32,13 @@ public class Vorrow: Npc
     {
         Player.SetDrawn(true);
     }
+
+    public override void AfterDeath()
+    {
+        ScreenManager.Worlds["Spawn"].GetNPCs()[Color.Maroon].NewDialogue(new List<Tuple<Color, string>>()
+        {
+            Tuple.Create(Color.IndianRed,"Finally, you're back! It has come to my attention that a citizen in this town who goes by the name of \"Lan\" is being unjustly suppressed by someone..."),
+            Tuple.Create(Color.IndianRed,"some other citizen in this town who goes by a name that currently does not reside in my memory. He is threatening the democracy of this town! Find him. Fix it. Fast.")
+        });
+    }
 }

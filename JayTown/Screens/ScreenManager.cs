@@ -30,7 +30,8 @@ public class ScreenManager
             {"FarmBend",new FarmBend(this,spriteBatch)},
             {"PathToHouse",new PathToHouse(this,spriteBatch)},
             {"Cabin1",new Cabin1(this,spriteBatch)},
-            {"Cabin2",new Cabin2(this,spriteBatch)}
+            {"Cabin2",new Cabin2(this,spriteBatch)},
+            {"CobbleRoad",new CobbleRoad(this,spriteBatch)}
         };
     }
 
