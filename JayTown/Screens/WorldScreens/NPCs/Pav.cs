@@ -7,6 +7,8 @@ namespace JayTown.Screens.WorldScreens.NPCs;
 
 public class Pav: Npc
 {
+    private bool _rambling;
+    
     public Pav(ScreenManager manager, SpriteBatch spriteBatch, World world) : base(manager, spriteBatch,
     Color.DarkOrange, world, new List<Tuple<Color, string>>()
     {
@@ -29,6 +31,12 @@ public class Pav: Npc
     })
     {
 
+        _rambling = false;
+    }
+
+    public void SetRambling(bool rambling)
+    {
+        _rambling = rambling;
     }
 
     public override void FinishedDialogue()
@@ -48,6 +56,38 @@ public class Pav: Npc
             Tuple.Create(Color.IndianRed,"I think it's time we put our foot down and remind them who calls the shots in this town. How about we start with Vorrow and his farm just north of here?"),
             Tuple.Create(Color.White,"..."),
             Tuple.Create(Color.IndianRed,"Alright then! We make a good team.")
+        });
+        
+        ((Chenny)World.GetNPCs()[Color.LightGreen]).SetRambling(true);
+    }
+    
+    public override void InitiateDialogue()
+    {
+        if (_rambling)
+        {
+            var rand = new Random();
+            Dialogue = new List<Tuple<Color, string>>()
+            {
+                Tuple.Create<Color, string>(Color.DarkOrange, Chenny.Lyrics[rand.Next(0, Chenny.Lyrics.Count)])
+            };
+        }
+        base.InitiateDialogue();
+
+    }
+    
+    public override void NextDialogue()
+    {
+        base.NextDialogue();
+
+        if (!_rambling)
+        {
+            return;
+        }
+        
+        var rand = new Random();
+        NewDialogue(new List<Tuple<Color, string>>()
+        {
+            Tuple.Create<Color, string>(Color.DarkOrange, Chenny.Lyrics[rand.Next(0, Chenny.Lyrics.Count)])
         });
     }
 }

@@ -70,8 +70,16 @@ public class TextPopup: Popup
     private void UpdateWrapped()
     {
         var width = Box.Width - Padding * 2;
-        if(Font.MeasureString(Text).X * Scale < width) {
-            WrappedText = Text;
+        try
+        {
+            if (Font.MeasureString(Text).X * Scale < width)
+            {
+                WrappedText = Text;
+            }
+        }
+        catch
+        {
+            Console.WriteLine(Text);
         }
 
         var lines = Text.Split('\n');

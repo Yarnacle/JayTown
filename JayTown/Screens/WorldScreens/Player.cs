@@ -28,7 +28,7 @@ public class Player: Tile
     private readonly List<Bullet> _bullets;
     private readonly List<Boom> _booms;
 
-    private const bool GunOverride = false;
+    private const bool GunOverride = true;
     
     public Player(ScreenManager manager,SpriteBatch spriteBatch,Texture2D texture, Point gridPosition): base(manager,spriteBatch,gridPosition,Color.Gray)
     {
@@ -120,7 +120,7 @@ public class Player: Tile
             }
         }
         
-        if ((_drawn || GunOverride) && !_paralyzed)
+        if ((_drawn && !_paralyzed) || GunOverride)
         {
             if (Game1.IsKeyPressed(Keys.Space))
             {
