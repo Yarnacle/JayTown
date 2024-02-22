@@ -27,6 +27,7 @@ public class Player: Tile
     private bool _drawn;
     private readonly List<Bullet> _bullets;
     private readonly List<Boom> _booms;
+    private int _kills;
     
     public Player(ScreenManager manager,SpriteBatch spriteBatch,Texture2D texture, Point gridPosition): base(manager,spriteBatch,gridPosition,Color.Gray)
     {
@@ -103,12 +104,15 @@ public class Player: Tile
             }
 
             var npcs = _world.GetNPCs();
-            foreach (var npc in npcs)
+            foreach (var npc in npcs.Values)
             {
-                if (npc.GetBox().Contains(bulletPosition))
+                if (npc.GetBox().Contains(bulletPosition) && !npc.IsDead())
                 {
                     _bullets.RemoveAt(i);
                     _booms.Add(new Boom(SpriteBatch,bulletPosition));
+                    npc.Die();
+                    ScreenManager.AddKill();
+                    _kills++;
                 }
             }
         }
@@ -149,6 +153,7 @@ public class Player: Tile
         
         if (_paralyzed)
         {
+            Console.WriteLine(gameTime.TotalGameTime + ": Paralyzed");
             return;
         }
         if (Game1.IsKeyDown(Keys.W) || Game1.IsKeyDown(Keys.S))
@@ -208,7 +213,14 @@ public class Player: Tile
         
         _spriteBatch.Draw(Textures.General.DestinationShadow,new Rectangle(_destination.X * 100,_destination.Y * 100,100,100),new Rectangle(0,0,_texture.Width,_texture.Height),Color.Black, 0, new Vector2(0,0), _horizontalFlip ? SpriteEffects.FlipHorizontally:SpriteEffects.None, 0);
         _spriteBatch.Draw(_texture, Box, new Rectangle(0, 0, _texture.Width,_texture.Height), Color.White, 0, new Vector2(0,0), _horizontalFlip ? SpriteEffects.FlipHorizontally:SpriteEffects.None, 0);
-        _spriteBatch.Draw(Textures.General.Gun,new Rectangle(Box.X - 50,Box.Y - 50,200,200),new Rectangle(0,0,Textures.General.Gun.Width,Textures.General.Gun.Height),Color.White,0,new Vector2(0,0),_horizontalFlip ? SpriteEffects.FlipHorizontally:SpriteEffects.None,0);
+        _spriteBatch.Draw(Textures.General.EvilEyes,Box,new Rectangle(0,0,_texture.Width,_texture.Height),Color.White * 0.2f * _kills,0,new Vector2(0,0),_horizontalFlip ? SpriteEffects.FlipHorizontally:SpriteEffects.None,0);
+        if (_drawn)
+        {
+            _spriteBatch.Draw(Textures.General.Gun, new Rectangle(Box.X - 50, Box.Y - 50, 200, 200),
+                new Rectangle(0, 0, Textures.General.Gun.Width, Textures.General.Gun.Height), Color.White, 0,
+                new Vector2(0, 0), _horizontalFlip ? SpriteEffects.FlipHorizontally : SpriteEffects.None, 0);
+        }
+
         foreach (var bullet in _bullets)
         {
             bullet.Draw(gameTime);

@@ -13,11 +13,13 @@ public class ScreenManager
     private readonly SpriteBatch _spriteBatch;
     private FullScreen _background;
     private readonly List<Screen> _foreground;
+    private int _kills;
 
     public readonly Dictionary<string,World> Worlds;
 
     public ScreenManager(SpriteBatch spriteBatch)
     {
+        _kills = 0;
         _spriteBatch = spriteBatch;
         _foreground = new List<Screen>();
 
@@ -26,10 +28,21 @@ public class ScreenManager
             { "Spawn", new Spawn(this, spriteBatch) },
             {"SpawnEntrance",new SpawnEntrance(this,spriteBatch)},
             {"FarmCorner",new FarmCorner(this,spriteBatch)},
-            {"PathToHouse",new PathToHouse(this,spriteBatch)}
+            {"PathToHouse",new PathToHouse(this,spriteBatch)},
+            {"Cabin1",new Cabin1(this,spriteBatch)}
         };
     }
 
+    public void AddKill()
+    {
+        _kills++;
+    }
+
+    public List<Screen> GetForeground()
+    {
+        return _foreground;
+    }
+    
 public void Update(GameTime gameTime)
     {
         _background.Update(gameTime);
@@ -56,6 +69,7 @@ public void Update(GameTime gameTime)
         {
             screen.Draw(gameTime);
         }
+        _spriteBatch.Draw(Textures.General.Vignette,FullScreen.Box,Color.White *  .2f * _kills);
     }
 
     public void RemoveAt(int index)

@@ -9,7 +9,6 @@ namespace JayTown.Screens.WorldScreens;
 
 public class Spawn : World
 {
-    private MayorJay MJ;
 
     public Spawn(ScreenManager manager, SpriteBatch spriteBatch) : base(manager, spriteBatch,
         (Texture2D)Textures.PixelMaps.Spawn, new Dictionary<Point, string>()
@@ -18,8 +17,7 @@ public class Spawn : World
             { new Point(-1, 5), "SpawnEntrance" }
         })
     {
-        MJ = new MayorJay(ScreenManager,SpriteBatch);
-        NPCs.Add(MJ);
+        NPCs.Add(Color.Maroon,new MayorJay(ScreenManager,spriteBatch,this));
     }
 
     public override void Enter(Player player)

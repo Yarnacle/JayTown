@@ -9,21 +9,31 @@ namespace JayTown.Screens.WorldScreens.NPCs;
 
 public abstract class Npc: Tile
 {
+    protected List<Point> Path;
+    protected World World;
+    protected int Destination;
     protected enum State
     {
         Before,During,After
     }
+
+    private bool _dead;
+    private int _deathFrames;
     
     protected TextPopup DialogueBox;
 
     protected Player Player;
-    // protected  Color TextColor;
     private int _dialogueIndex;
     protected List<Tuple<Color,string>> Dialogue;
     protected State DialogueState;
     
-    protected Npc(ScreenManager manager,SpriteBatch spriteBatch,Color color,List<Tuple<Color,string>> dialogue): base(manager,spriteBatch,new Point(6,4),color)
+    protected Npc(ScreenManager manager,SpriteBatch spriteBatch,Color color,World world,List<Tuple<Color,string>> dialogue,Point gridPosition,List<Point> path): base(manager,spriteBatch,gridPosition,color)
     {
+        _dead = false;
+        _deathFrames = -1;
+        World = world;
+        Destination = -1;
+        Path = path;
         DialogueState = State.Before;
         Dialogue = dialogue;
         _dialogueIndex = 0;
@@ -37,8 +47,17 @@ public abstract class Npc: Tile
         Player = player;
     }
 
+    public bool IsDead()
+    {
+        return _dead;
+    }
+
     public virtual void InitiateDialogue()
     {
+        if (_dead)
+        {
+            return;
+        }
         if (DialogueState == State.After)
         {
             return;
@@ -47,7 +66,6 @@ public abstract class Npc: Tile
         Player.SetParalyzed(true);
         DialogueState = State.During;
     }
-
     public void NextDialogue()
     {
         if (_dialogueIndex == Dialogue.Count - 1)
@@ -61,8 +79,90 @@ public abstract class Npc: Tile
         DialogueBox.SetText(Dialogue[_dialogueIndex].Item2);
     }
 
+    public void Die()
+    {
+        if (_dead)
+        {
+            return;
+            
+        }
+        _dead = true;
+        _deathFrames = 0;
+    }
+
+    public void ChangeWorld(World world,Point position,List<Point> newPath,List<Tuple<Color,string>> newDialogue)
+    {
+        GridPosition = position;
+        Box.X = GridPosition.X * 100;
+        Box.Y = GridPosition.Y * 100;
+        World = world;
+        Path = newPath;
+        Dialogue = newDialogue;
+        DialogueState = State.Before;
+        _dialogueIndex = 0;
+        world.AddNPC(this);
+    }
+
+    public Point GetDestination()
+    {
+        if (Destination < 0 || Destination > Path.Count)
+        {
+            return GridPosition;
+            
+        }
+        if (Path[Destination].Y > GridPosition.Y)
+        {
+            return new Point(GridPosition.X, GridPosition.Y + 1);
+        }
+        
+        if (Path[Destination].Y < GridPosition.Y)
+        {
+            return new Point(GridPosition.X, GridPosition.Y - 1);
+        }
+        
+        if (Path[Destination].X > GridPosition.X)
+        {
+            return new Point(GridPosition.X + 1, GridPosition.Y);
+        }
+        
+        if (Path[Destination].X < GridPosition.X)
+        {
+            return new Point(GridPosition.X - 1, GridPosition.Y);
+        }
+        
+        return GridPosition;
+    }
+
     public override void Draw(GameTime gameTime)
     {
+        if (_deathFrames > 40)
+        {
+            SpriteBatch.Draw(Textures.NPCs.Death3,Box,Color.White);
+        }
+        else if (_deathFrames > 30)
+        {
+            SpriteBatch.Draw(Textures.NPCs.Death3,Box,Color.White);
+            SpriteBatch.Draw(Textures.Tiles[Color],new Rectangle(Box.X,Box.Y + 45,Box.Width,Box.Height - 90),Color.White);
+        }
+        else if (_deathFrames > 20)
+        {
+            SpriteBatch.Draw(Textures.NPCs.Death2,Box,Color.White);
+            SpriteBatch.Draw(Textures.Tiles[Color],new Rectangle(Box.X,Box.Y + 40,Box.Width,Box.Height - 80),Color.White);
+        }
+        else if (_deathFrames > 10)
+        {
+            SpriteBatch.Draw(Textures.NPCs.Death1,Box,Color.White);
+            SpriteBatch.Draw(Textures.Tiles[Color],new Rectangle(Box.X,Box.Y + 30,Box.Width,Box.Height - 60),Color.White);
+        }
+        else if (_deathFrames > -1)
+        {
+            SpriteBatch.Draw(Textures.Tiles[Color],new Rectangle(Box.X,Box.Y + 10,Box.Width,Box.Height - 20),Color.White);
+        }
+
+        if (_dead)
+        {
+            return;
+        }
         base.Draw(gameTime);
         if (DialogueState == State.During)
         {
@@ -76,11 +176,44 @@ public abstract class Npc: Tile
 
     public override void Update(GameTime gameTime)
     {
+        if (_dead)
+        {
+            _deathFrames++;
+            return;
+        }
         if (DialogueState == State.During)
         {
             if (Game1.IsKeyPressed(Keys.F))
             {
                 NextDialogue();
+            }
+        }
+
+        if (Destination > -1 && Destination < Path.Count)
+        {
+            if (Box.Y % 100 == 0 && Box.X % 100 == 0)
+            {
+                GridPosition = new Point(Box.X / 100, Box.Y / 100);
+            }
+            if (Path[Destination].Y * 100 == Box.Y && Path[Destination].X * 100 == Box.X)
+            {
+                Destination++;
+            }
+            else if (Path[Destination].Y > GridPosition.Y)
+            {
+                Box.Y += 5;
+            }
+            else if (Path[Destination].X > GridPosition.X)
+            {
+                Box.X += 5;
+            }
+            else if (Path[Destination].X < GridPosition.X)
+            {
+                Box.X -= 5;
+            }
+            else
+            {
+                Box.Y -= 5;
             }
         }
     }

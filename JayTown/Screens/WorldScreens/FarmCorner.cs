@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using JayTown.GameTextures;
+using JayTown.Screens.WorldScreens.NPCs;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -18,5 +20,19 @@ public class FarmCorner: World
         })
     {
         
+    }
+
+    public override void Update(GameTime gameTime)
+    {
+        base.Update(gameTime);
+    }
+
+    public override void Enter(Player player)
+    {
+        base.Enter(player);
+        if (NPCs.ContainsKey(Color.Purple)) {
+            ((Robber)NPCs[Color.Purple]).Start();
+            Player.SetDrawn(true);
+        }
     }
 }

@@ -35,16 +35,19 @@ public static class Textures
         General.DestinationShadow = LoadTile("General/DestinationShadow.png", Color.LightGray);
         General.Gun = Load("General/Gun.png");
         General.Bullet = Load("General/Bullet.png");
+        General.Vignette = Load("General/Vignette.png");
         General.Boom1 = Load("General/Boom1.png");
         General.Boom2 = Load("General/Boom2.png");
         General.DialogueBox = Load("General/DialogueBox.png");
         General.NextArrow = Load("General/NextArrow.png");
+        General.EvilEyes = Load("General/EvilEyes.png");
 
 
         PixelMaps.Spawn = Load("PixelMaps/Spawn.png");
         PixelMaps.SpawnEntrance = Load("PixelMaps/SpawnEntrance.png");
         PixelMaps.FarmCorner = Load("PixelMaps/FarmCorner.png");
         PixelMaps.PathToHouse = Load("PixelMaps/PathToHouse.png");
+        PixelMaps.Cabin1 = Load("PixelMaps/Cabin1.png");
         
         HomeScreen.Background = Load("HomeScreen/Background.png");
 
@@ -59,8 +62,12 @@ public static class Textures
         MaterialTiles.Water = LoadTile("MaterialTiles/Water.png", Color.Blue);
         MaterialTiles.Wall = LoadTile("MaterialTiles/Wall.png", Color.SlateGray);
 
+        NPCs.Death1 = LoadTile("NPCs/Death1.png", new Color(150,150,150));
+        NPCs.Death2 = LoadTile("NPCs/Death2.png", new Color(100,100,100));
+        NPCs.Death3 = LoadTile("NPCs/Death3.png", new Color(50,50,50));
         NPCs.MayorJay = LoadTile("NPCs/MayorJay.png", Color.Maroon);
         NPCs.GangLeader = LoadTile("NPCs/GangLeader.png", Color.Yellow);
+        NPCs.Robber = LoadTile("NPCs/Robber.png", Color.Purple);
     }
 
     private static Texture2D Load(string path)
