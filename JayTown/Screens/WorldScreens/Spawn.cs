@@ -23,7 +23,7 @@ public class Spawn : World
     public override void Enter(Player player)
     {
         base.Enter(player);
-        player.SetDrawn(true);
+        player.SetDrawn(false);
     }
     
     public override void Draw(GameTime gameTime)

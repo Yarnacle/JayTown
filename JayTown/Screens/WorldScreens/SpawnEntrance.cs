@@ -24,7 +24,6 @@ public class SpawnEntrance: World
             {new Point(4,10),"PathToHouse"}
         })
     {
-        NPCs.Add(Color.Purple,new Robber(manager,spriteBatch,this));
     }
 
     public override void Enter(Player player)

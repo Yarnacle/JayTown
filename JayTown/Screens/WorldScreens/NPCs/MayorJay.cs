@@ -7,17 +7,34 @@ namespace JayTown.Screens.WorldScreens.NPCs;
 
 public class MayorJay: Npc
 {
+    private int _plotProgress;
+    
     public MayorJay(ScreenManager manager,SpriteBatch spriteBatch,World world) : base(manager,spriteBatch, Color.Maroon,world,new List<Tuple<Color,string>>()
     {
         Tuple.Create(Color.DarkRed,"Hello! Ready for your next task?"),
         Tuple.Create(Color.White,"..."),
         Tuple.Create(Color.DarkRed,"Talkative as usual. Anyway there's a ROBBER on the lose. Get him please.")
-    },new Point(6,4),new List<Point>()) {
-        
+    },new Point(6,4),new List<Point>(),null)
+    {
+        _plotProgress = 0;
     }
 
-    public override void InitiateDialogue()
+    public override void NextDialogue()
     {
-        base.InitiateDialogue();
+        base.NextDialogue();
+        
+        if (DialogueState == State.After) // on dialogue finish
+        {
+            if (_plotProgress == 0)
+            {
+                ScreenManager.Worlds["SpawnEntrance"].GetNPCs().Add(Color.Purple,new Robber(ScreenManager,SpriteBatch,ScreenManager.Worlds["SpawnEntrance"]));
+            }
+            else if (_plotProgress == 1)
+            {
+                ScreenManager.Worlds["Cabin1"].GetNPCs().Add(Color.Purple,new Robber(ScreenManager,SpriteBatch,ScreenManager.Worlds["SpawnEntrance"]));
+            }
+
+            _plotProgress++;
+        }
     }
 }

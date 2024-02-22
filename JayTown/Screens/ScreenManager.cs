@@ -38,6 +38,11 @@ public class ScreenManager
         _kills++;
     }
 
+    public int GetKills()
+    {
+        return _kills;
+    }
+    
     public List<Screen> GetForeground()
     {
         return _foreground;

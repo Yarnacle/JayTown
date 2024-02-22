@@ -19,9 +19,25 @@ public class Robber: Npc
             new Point(1, 2),
             new Point(2, 2),
             new Point(2, -1)
+        },new List<Tuple<Color, string>>()
+        {
+            Tuple.Create(Color.Purple,"uRggh...")
         })
     {
 
+    }
+
+    public override void Die()
+    {
+        base.Die();
+        ScreenManager.Worlds["Spawn"].GetNPCs()[Color.Maroon].NewDialogue(new List<Tuple<Color, string>>()
+        {
+            Tuple.Create(Color.DarkRed,"Good work. You know it's thanks to you that we can have peace in this town."),
+            Tuple.Create(Color.White,"..."),
+            Tuple.Create(Color.DarkRed,"Alright, pal. I have received reports of someone disturbing the peace near the southwest cabin. Mind taking care of it?"),
+            Tuple.Create(Color.White,"..."),
+            Tuple.Create(Color.DarkRed,"Great. I knew I could count on you.")
+        });
     }
 
     public void Start()
@@ -38,14 +54,14 @@ public class Robber: Npc
         }
         if (DialogueState == State.After)
         {
-            if (Destination == -1)
+            if (Destination == -1 && Dialogue.Count != 1)
             {
                 Destination = 0;
             }
         }
         if (Destination == Path.Count)
         {
-            Console.WriteLine("Finished");
+            Console.WriteLine("Pathing finished");
             if (World == ScreenManager.Worlds["SpawnEntrance"])
             {
                 World.RemoveNPC(Color);

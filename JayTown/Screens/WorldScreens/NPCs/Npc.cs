@@ -23,12 +23,16 @@ public abstract class Npc: Tile
     protected TextPopup DialogueBox;
 
     protected Player Player;
-    private int _dialogueIndex;
+    protected int DialogueIndex;
     protected List<Tuple<Color,string>> Dialogue;
     protected State DialogueState;
+    protected List<Tuple<Color, string>> LastWords;
+    private bool _sayingLastWords;
     
-    protected Npc(ScreenManager manager,SpriteBatch spriteBatch,Color color,World world,List<Tuple<Color,string>> dialogue,Point gridPosition,List<Point> path): base(manager,spriteBatch,gridPosition,color)
+    protected Npc(ScreenManager manager,SpriteBatch spriteBatch,Color color,World world,List<Tuple<Color,string>> dialogue,Point gridPosition,List<Point> path,List<Tuple<Color,string>> lastWords): base(manager,spriteBatch,gridPosition,color)
     {
+        _sayingLastWords = false;
+        LastWords = lastWords;
         Dead = false;
         _deathFrames = -1;
         World = world;
@@ -36,7 +40,7 @@ public abstract class Npc: Tile
         Path = path;
         DialogueState = State.Before;
         Dialogue = dialogue;
-        _dialogueIndex = 0;
+        DialogueIndex = 0;
         // TextColor = textColor;
         DialogueBox = new TextPopup(manager, spriteBatch, new Rectangle(0, 750, 1000, 250), Textures.General.Font,
             Dialogue[0].Item2, Dialogue[0].Item1, .6f, 60, Textures.General.DialogueBox);
@@ -45,6 +49,13 @@ public abstract class Npc: Tile
     public void SetPlayer(Player player)
     {
         Player = player;
+    }
+
+    public void NewDialogue(List<Tuple<Color,string>> newDialogue)
+    {
+        Dialogue = newDialogue;
+        DialogueState = State.Before;
+        DialogueIndex = 0;
     }
 
     public bool IsDead()
@@ -62,33 +73,49 @@ public abstract class Npc: Tile
         {
             return;
         }
-
+        DialogueBox.SetColor(Dialogue[DialogueIndex].Item1);
+        DialogueBox.SetText(Dialogue[DialogueIndex].Item2);
         Player.SetParalyzed(true);
         DialogueState = State.During;
     }
-    public void NextDialogue()
+    public virtual void NextDialogue()
     {
-        if (_dialogueIndex == Dialogue.Count - 1)
+        if (DialogueIndex == Dialogue.Count - 1)
         {
             DialogueState = State.After;
             Player.SetParalyzed(false);
+            if (_sayingLastWords)
+            {
+                LastWords = null;
+                Die();
+            }
+
             return;
         }
-        _dialogueIndex++;
-        DialogueBox.SetColor(Dialogue[_dialogueIndex].Item1);
-        DialogueBox.SetText(Dialogue[_dialogueIndex].Item2);
+        DialogueIndex++;
+        DialogueBox.SetColor(Dialogue[DialogueIndex].Item1);
+        DialogueBox.SetText(Dialogue[DialogueIndex].Item2);
     }
 
-    public void Die()
+    public virtual void Die()
     {
         if (Dead)
         {
             return;
         }
+
+        if (LastWords != null)
+        {
+            NewDialogue(LastWords);
+            InitiateDialogue();
+            _sayingLastWords = true;
+            return;
+        }
+        
         Dead = true;
         _deathFrames = 0;
         DialogueState = State.After;
-        
+        ScreenManager.AddKill();
     }
 
     public void ChangeWorld(World world,Point position,List<Point> newPath,List<Tuple<Color,string>> newDialogue)
@@ -98,9 +125,7 @@ public abstract class Npc: Tile
         Box.Y = GridPosition.Y * 100;
         World = world;
         Path = newPath;
-        Dialogue = newDialogue;
-        DialogueState = State.Before;
-        _dialogueIndex = 0;
+        NewDialogue(newDialogue);
         world.AddNPC(this);
     }
 
@@ -169,7 +194,7 @@ public abstract class Npc: Tile
         if (DialogueState == State.During)
         {
             DialogueBox.Draw(gameTime);
-            if (_dialogueIndex < Dialogue.Count - 1)
+            if (DialogueIndex < Dialogue.Count - 1)
             {
                 SpriteBatch.Draw(Textures.General.NextArrow, new Rectangle(910,910, 32, 32), Color.White);
             }
@@ -178,7 +203,14 @@ public abstract class Npc: Tile
 
     public override void Update(GameTime gameTime)
     {
-        if (Dead)
+        if (DialogueState == State.During)
+        {
+            if (Game1.IsKeyPressed(Keys.F))
+            {
+                NextDialogue();
+            }
+        }
+        if (Dead || _sayingLastWords)
         {
             if (GridPosition != GetDestination())
             {
@@ -208,13 +240,6 @@ public abstract class Npc: Tile
             }
             _deathFrames++;
             return;
-        }
-        if (DialogueState == State.During)
-        {
-            if (Game1.IsKeyPressed(Keys.F))
-            {
-                NextDialogue();
-            }
         }
 
         if (Destination > -1 && Destination < Path.Count)
