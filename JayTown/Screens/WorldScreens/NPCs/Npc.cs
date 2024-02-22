@@ -17,7 +17,7 @@ public abstract class Npc: Tile
         Before,During,After
     }
 
-    private bool _dead;
+    protected bool Dead;
     private int _deathFrames;
     
     protected TextPopup DialogueBox;
@@ -29,7 +29,7 @@ public abstract class Npc: Tile
     
     protected Npc(ScreenManager manager,SpriteBatch spriteBatch,Color color,World world,List<Tuple<Color,string>> dialogue,Point gridPosition,List<Point> path): base(manager,spriteBatch,gridPosition,color)
     {
-        _dead = false;
+        Dead = false;
         _deathFrames = -1;
         World = world;
         Destination = -1;
@@ -49,12 +49,12 @@ public abstract class Npc: Tile
 
     public bool IsDead()
     {
-        return _dead;
+        return Dead;
     }
 
     public virtual void InitiateDialogue()
     {
-        if (_dead)
+        if (Dead)
         {
             return;
         }
@@ -81,13 +81,14 @@ public abstract class Npc: Tile
 
     public void Die()
     {
-        if (_dead)
+        if (Dead)
         {
             return;
-            
         }
-        _dead = true;
+        Dead = true;
         _deathFrames = 0;
+        DialogueState = State.After;
+        
     }
 
     public void ChangeWorld(World world,Point position,List<Point> newPath,List<Tuple<Color,string>> newDialogue)
@@ -135,6 +136,7 @@ public abstract class Npc: Tile
 
     public override void Draw(GameTime gameTime)
     {
+        // SpriteBatch.Draw(Textures.General.SolidColor,new Rectangle(GridPosition.X * 100,GridPosition.Y * 100,100,100),Color.White);
         if (_deathFrames > 40)
         {
             SpriteBatch.Draw(Textures.NPCs.Death3,Box,Color.White);
@@ -159,7 +161,7 @@ public abstract class Npc: Tile
             SpriteBatch.Draw(Textures.Tiles[Color],new Rectangle(Box.X,Box.Y + 10,Box.Width,Box.Height - 20),Color.White);
         }
 
-        if (_dead)
+        if (Dead)
         {
             return;
         }
@@ -176,8 +178,34 @@ public abstract class Npc: Tile
 
     public override void Update(GameTime gameTime)
     {
-        if (_dead)
+        if (Dead)
         {
+            if (GridPosition != GetDestination())
+            {
+                if (GetDestination().X * 100 > Box.X)
+                {
+                    Box.X += 5;
+                }
+                else if (GetDestination().Y * 100 > Box.Y)
+                {
+                    Box.Y += 5;
+                }
+                else if (GetDestination().X * 100 < Box.X)
+                {
+                    Box.X -= 5;
+                }
+                else if (GetDestination().Y * 100 < Box.Y)
+                {
+                    Box.Y -= 5;
+                }
+
+                if (Box.X == GetDestination().X * 100 && Box.Y == GetDestination().Y * 100)
+                {
+                    GridPosition = GetDestination();
+                    Destination = -1;
+                    Console.WriteLine("No more remains momentum");
+                }
+            }
             _deathFrames++;
             return;
         }

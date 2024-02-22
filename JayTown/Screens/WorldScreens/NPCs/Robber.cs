@@ -32,6 +32,10 @@ public class Robber: Npc
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
+        if (Dead)
+        {
+            return;
+        }
         if (DialogueState == State.After)
         {
             if (Destination == -1)
