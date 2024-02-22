@@ -21,13 +21,18 @@ public class Pav: Npc
         Tuple.Create(Color.LightGreen,"YOU'RE THE ONE YELLING!"),
         Tuple.Create(Color.DarkOrange,"CALM YO ASS DOWN."),
         Tuple.Create(Color.LightGreen,"NAH I'M GONNA BOX YOUR ASS UP-"),
-        Tuple.Create(Color.DarkOrange,"OH, SO THAT'S HOW IT IS THEN. YOU'RE NOT READY FOR THIS.")
+        Tuple.Create(Color.DarkOrange,"OH. OOOHHH. SO THAT'S HOW IT IS. YOU'RE NOT READY FOR THIS.")
     }, new Point(5, 6), null,new List<Tuple<Color, string>>()
     {
         Tuple.Create(Color.DarkOrange,"Clear... my... search history..."),
-        Tuple.Create(Color.LightGreen,"Don't call for medical attention! I don't want to be in debt for the rest of my life...")
+        Tuple.Create(Color.LightGreen,"No shot you actually killed him. But don't call for medical attention! I don't want to be in debt for the rest of my life...")
     })
     {
 
+    }
+
+    public override void FinishedDialogue()
+    {
+        Player.SetDrawn(true);
     }
 }

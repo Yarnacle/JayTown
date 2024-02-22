@@ -11,7 +11,7 @@ public class Chenny: Npc
     Color.LightGreen, world, null, new Point(2, 6), null,new List<Tuple<Color, string>>()
     {
         Tuple.Create(Color.LightGreen,"Clear... my... search history..."),
-        Tuple.Create(Color.DarkOrange,"Don't call for medical attention! I don't want to be in debt for the rest of my life...")
+        Tuple.Create(Color.DarkOrange,"No shot you actually killed him. But don't call for medical attention! I don't want to be in debt for the rest of my life...")
     })
     {
 

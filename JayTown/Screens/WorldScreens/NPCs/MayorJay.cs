@@ -19,23 +19,20 @@ public class MayorJay: Npc
         _plotProgress = 0;
     }
 
-    public override void NextDialogue()
+    public override void FinishedDialogue()
     {
-        base.NextDialogue();
-        
-        if (DialogueState == State.After) // on dialogue finish
+        if (_plotProgress == 0)
         {
-            if (_plotProgress == 0)
-            {
-                ScreenManager.Worlds["SpawnEntrance"].AddNPC(new Robber(ScreenManager,SpriteBatch,ScreenManager.Worlds["SpawnEntrance"]));
-            }
-            else if (_plotProgress == 1)
-            {
-                ScreenManager.Worlds["Cabin1"].AddNPC(new Chenny(ScreenManager,SpriteBatch,ScreenManager.Worlds["Cabin1"]));
-                ScreenManager.Worlds["Cabin1"].AddNPC(new Pav(ScreenManager,SpriteBatch,ScreenManager.Worlds["Cabin1"]));
-            }
-
-            _plotProgress++;
+            ScreenManager.Worlds["SpawnEntrance"]
+                .AddNPC(new Robber(ScreenManager, SpriteBatch, ScreenManager.Worlds["SpawnEntrance"]));
         }
+        else if (_plotProgress == 1)
+        {
+            ScreenManager.Worlds["Cabin1"]
+                .AddNPC(new Chenny(ScreenManager, SpriteBatch, ScreenManager.Worlds["Cabin1"]));
+            ScreenManager.Worlds["Cabin1"].AddNPC(new Pav(ScreenManager, SpriteBatch, ScreenManager.Worlds["Cabin1"]));
+        }
+
+        _plotProgress++;
     }
 }

@@ -12,7 +12,7 @@ public class Cabin1: World
         {
             { new Point(5, -1), "PathToHouse" },
             { new Point(6, -1), "PathToHouse" }
-        },true)
+        },false)
     {
         
     }
@@ -25,12 +25,10 @@ public class Cabin1: World
             if (NPCs[Color.DarkOrange].IsDead())
             {
                 Player.SetDrawn(false);
-                SetAllowGun(false);
             }
             else if (NPCs[Color.LightGreen].IsDead())
             {
                 Player.SetDrawn(false);
-                SetAllowGun(false);
             }
         }
     }

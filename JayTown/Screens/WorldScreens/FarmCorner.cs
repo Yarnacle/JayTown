@@ -30,7 +30,7 @@ public class FarmCorner: World
     public override void Enter(Player player)
     {
         base.Enter(player);
-        if (NPCs.ContainsKey(Color.Purple)) {
+        if (NPCs.ContainsKey(Color.Purple) && !NPCs[Color.Purple].IsDead()) {
             ((Robber)NPCs[Color.Purple]).Start();
             Player.SetDrawn(true);
         }

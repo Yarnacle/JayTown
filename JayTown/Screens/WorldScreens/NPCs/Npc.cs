@@ -96,11 +96,17 @@ public abstract class Npc: Tile
                 Die();
             }
 
+            FinishedDialogue();
             return;
         }
         DialogueIndex++;
         DialogueBox.SetColor(Dialogue[DialogueIndex].Item1);
         DialogueBox.SetText(Dialogue[DialogueIndex].Item2);
+    }
+
+    public virtual void FinishedDialogue()
+    {
+        
     }
 
     public virtual void Die()
