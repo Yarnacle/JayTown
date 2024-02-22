@@ -50,6 +50,12 @@ public class TextPopup: Popup
         
     }
 
+    public void SetPosition(int x, int y)
+    {
+        Box.X = x;
+        Box.Y = y;
+    }
+
     public void SetColor(Color color)
     {
         Color = color;

@@ -11,9 +11,9 @@ public class Robber: Npc
     public Robber(ScreenManager manager, SpriteBatch spriteBatch, World world) : base(manager, spriteBatch,
         Color.Purple, world, new List<Tuple<Color, string>>()
         {
-            Tuple.Create(Color.Purple, "What do you want?"),
+            Tuple.Create(Color.MediumPurple, "What do you want?"),
             Tuple.Create(Color.White, "..."),
-            Tuple.Create(Color.Purple, "Do I look like a criminal to you?! I'll be on my way now.")
+            Tuple.Create(Color.MediumPurple, "Do I look like a criminal to you?! I'll be on my way now.")
         }, new Point(1, 4), new List<Point>()
         {
             new(1, 2),
@@ -21,7 +21,7 @@ public class Robber: Npc
             new(2, -1)
         },new List<Tuple<Color, string>>()
         {
-            Tuple.Create(Color.Purple,"uRggh...")
+            Tuple.Create(Color.MediumPurple,"uRggh...")
         })
     {
 
@@ -31,11 +31,11 @@ public class Robber: Npc
     {
         ScreenManager.Worlds["Spawn"].GetNPCs()[Color.Maroon].NewDialogue(new List<Tuple<Color, string>>()
         {
-            Tuple.Create(Color.DarkRed,"Good work. You know it's thanks to you that we can have peace in this town."),
+            Tuple.Create(Color.IndianRed,"Good work. You know it's thanks to you that we can have peace in this town."),
             Tuple.Create(Color.White,"..."),
-            Tuple.Create(Color.DarkRed,"Cool. Anyway, I have received reports of someone disturbing the peace near Pav and Chenny's cabin down south. Mind taking care of it?"),
+            Tuple.Create(Color.IndianRed,"Cool. Anyway, I have received reports of someone disturbing the peace near Pav and Chenny's cabin down south. Mind taking care of it?"),
             Tuple.Create(Color.White,"..."),
-            Tuple.Create(Color.DarkRed,"Great, I knew I could count on you.")
+            Tuple.Create(Color.IndianRed,"Great, I knew I could count on you.")
         });
     }
 

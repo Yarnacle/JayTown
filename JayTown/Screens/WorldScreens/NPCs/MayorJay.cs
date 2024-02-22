@@ -11,9 +11,9 @@ public class MayorJay: Npc
     
     public MayorJay(ScreenManager manager,SpriteBatch spriteBatch,World world) : base(manager,spriteBatch, Color.Maroon,world,new List<Tuple<Color,string>>()
     {
-        Tuple.Create(Color.DarkRed,"Hello! Ready for your next task?"),
+        Tuple.Create(Color.IndianRed,"Hello! Ready for your next task?"),
         Tuple.Create(Color.White,"..."),
-        Tuple.Create(Color.DarkRed,"Talkative as usual. Anyway there's a ROBBER on the lose. Get him please.")
+        Tuple.Create(Color.IndianRed,"Talkative as usual. Anyway there's a ROBBER on the lose. Get him please.")
     },new Point(6,4),new List<Point>(),null)
     {
         _plotProgress = 0;
