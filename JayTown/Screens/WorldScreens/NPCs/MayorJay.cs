@@ -32,6 +32,10 @@ public class MayorJay: Npc
                 .AddNPC(new Chenny(ScreenManager, SpriteBatch, ScreenManager.Worlds["Cabin1"]));
             ScreenManager.Worlds["Cabin1"].AddNPC(new Pav(ScreenManager, SpriteBatch, ScreenManager.Worlds["Cabin1"]));
         }
+        else if (_plotProgress == 2)
+        {
+            ScreenManager.Worlds["FarmBend"].AddNPC(new Vorrow(ScreenManager,SpriteBatch,ScreenManager.Worlds["FarmBend"]));
+        }
 
         _plotProgress++;
     }

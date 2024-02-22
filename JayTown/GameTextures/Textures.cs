@@ -45,9 +45,11 @@ public static class Textures
 
         PixelMaps.Spawn = Load("PixelMaps/Spawn.png");
         PixelMaps.SpawnEntrance = Load("PixelMaps/SpawnEntrance.png");
-        PixelMaps.FarmCorner = Load("PixelMaps/FarmCorner.png");
         PixelMaps.PathToHouse = Load("PixelMaps/PathToHouse.png");
         PixelMaps.Cabin1 = Load("PixelMaps/Cabin1.png");
+        PixelMaps.Cabin2 = Load("PixelMaps/Cabin2.png");
+        PixelMaps.FarmRoad = Load("PixelMaps/FarmRoad.png");
+        PixelMaps.FarmBend = Load("PixelMaps/FarmBend.png");
         
         HomeScreen.Background = Load("HomeScreen/Background.png");
 
@@ -70,6 +72,7 @@ public static class Textures
         NPCs.Robber = LoadTile("NPCs/Robber.png", Color.Purple);
         NPCs.Chenny = LoadTile("NPCs/Chenny.png", Color.LightGreen);
         NPCs.Pav = LoadTile("NPCs/Pav.png", Color.DarkOrange);
+        NPCs.Vorrow = LoadTile("NPCs/Vorrow.png", Color.DarkGreen);
     }
 
     private static Texture2D Load(string path)

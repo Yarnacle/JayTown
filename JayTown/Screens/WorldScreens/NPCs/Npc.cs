@@ -44,7 +44,7 @@ public abstract class Npc: Tile
         DialogueIndex = 0;
         // TextColor = textColor;
         DialogueBox = new TextPopup(manager, spriteBatch, new Rectangle(0, 750, 1000, 250), Textures.General.Font,
-            Dialogue == null ? "ERROR":Dialogue[0].Item2, Dialogue == null ? Color.Red:Dialogue[0].Item1, .6f, 60, Textures.General.DialogueBox);
+            Dialogue == null ? "ERROR":Dialogue[0].Item2, Dialogue == null ? Color.Red:Dialogue[0].Item1, .5f, 60, Textures.General.DialogueBox);
     }
 
     public void SetPlayer(Player player)
@@ -128,6 +128,13 @@ public abstract class Npc: Tile
         _deathFrames = 0;
         DialogueState = State.After;
         ScreenManager.AddKill();
+
+        AfterDeath();
+    }
+
+    public virtual void AfterDeath()
+    {
+        
     }
 
     public void ChangeWorld(World world,Point position,List<Point> newPath,List<Tuple<Color,string>> newDialogue)

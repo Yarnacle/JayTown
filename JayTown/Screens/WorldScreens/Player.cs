@@ -45,6 +45,10 @@ public class Player: Tile
     public void SetParalyzed(bool paralyzed)
     {
         _paralyzed = paralyzed;
+        if (_paralyzed)
+        {
+            _drawn = false;
+        }
     }
 
     public void SetDrawn(bool drawn)
@@ -115,13 +119,15 @@ public class Player: Tile
                 }
             }
         }
-        if (_drawn || GunOverride)
+        
+        if ((_drawn || GunOverride) && !_paralyzed)
         {
             if (Game1.IsKeyPressed(Keys.Space))
             {
                 _bullets.Add(new Bullet(SpriteBatch,_horizontalFlip ? -10:10,new Rectangle(Box.X - 50,Box.Y - 50,200,200)));
             }
         }
+        
         if (_moveDirection != Direction.None)
         {
             const int speed = 10;
@@ -155,6 +161,7 @@ public class Player: Tile
             // Console.WriteLine(gameTime.TotalGameTime + ": Paralyzed");
             return;
         }
+        
         if (Game1.IsKeyDown(Keys.W) || Game1.IsKeyDown(Keys.S))
         {
             if (Game1.IsKeyDown(Keys.W))

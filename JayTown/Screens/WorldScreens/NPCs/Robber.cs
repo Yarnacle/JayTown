@@ -27,14 +27,13 @@ public class Robber: Npc
 
     }
 
-    public override void Die()
+    public override void AfterDeath()
     {
-        base.Die();
         ScreenManager.Worlds["Spawn"].GetNPCs()[Color.Maroon].NewDialogue(new List<Tuple<Color, string>>()
         {
             Tuple.Create(Color.DarkRed,"Good work. You know it's thanks to you that we can have peace in this town."),
             Tuple.Create(Color.White,"..."),
-            Tuple.Create(Color.DarkRed,"Cool. Anyway, I have received reports of someone disturbing the peace near Pav and Chenny's cabin. Mind taking care of it?"),
+            Tuple.Create(Color.DarkRed,"Cool. Anyway, I have received reports of someone disturbing the peace near Pav and Chenny's cabin down south. Mind taking care of it?"),
             Tuple.Create(Color.White,"..."),
             Tuple.Create(Color.DarkRed,"Great, I knew I could count on you.")
         });
@@ -69,13 +68,13 @@ public class Robber: Npc
             if (World == ScreenManager.Worlds["SpawnEntrance"])
             {
                 World.RemoveNPC(Color);
-                ChangeWorld(ScreenManager.Worlds["FarmCorner"],new Point(3,5),new List<Point>(){new Point(0,5),new Point(0,0)},new List<Tuple<Color, string>>()
+                ChangeWorld(ScreenManager.Worlds["FarmRoad"],new Point(3,5),new List<Point>(){new Point(0,5),new Point(0,0)},new List<Tuple<Color, string>>()
                 {
                         
                 });
                 DialogueState = State.After;
             }
-            else if (World == ScreenManager.Worlds["FarmCorner"]) {
+            else if (World == ScreenManager.Worlds["FarmRoad"]) {
                 Destination = -1;
             }
         }

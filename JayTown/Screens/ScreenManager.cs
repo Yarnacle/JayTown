@@ -27,9 +27,11 @@ public class ScreenManager
         {
             { "Spawn", new Spawn(this, spriteBatch) },
             {"SpawnEntrance",new SpawnEntrance(this,spriteBatch)},
-            {"FarmCorner",new FarmCorner(this,spriteBatch)},
+            {"FarmRoad",new FarmRoad(this,spriteBatch)},
+            {"FarmBend",new FarmBend(this,spriteBatch)},
             {"PathToHouse",new PathToHouse(this,spriteBatch)},
-            {"Cabin1",new Cabin1(this,spriteBatch)}
+            {"Cabin1",new Cabin1(this,spriteBatch)},
+            {"Cabin2",new Cabin2(this,spriteBatch)}
         };
     }
 
