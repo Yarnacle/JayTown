@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Text.Encodings.Web;
 using JayTown.GameTextures;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -43,7 +44,7 @@ public abstract class Npc: Tile
         DialogueIndex = 0;
         // TextColor = textColor;
         DialogueBox = new TextPopup(manager, spriteBatch, new Rectangle(0, 750, 1000, 250), Textures.General.Font,
-            Dialogue[0].Item2, Dialogue[0].Item1, .6f, 60, Textures.General.DialogueBox);
+            Dialogue == null ? "ERROR":Dialogue[0].Item2, Dialogue == null ? Color.Red:Dialogue[0].Item1, .6f, 60, Textures.General.DialogueBox);
     }
 
     public void SetPlayer(Player player)
@@ -70,6 +71,11 @@ public abstract class Npc: Tile
             return;
         }
         if (DialogueState == State.After)
+        {
+            return;
+        }
+
+        if (Dialogue == null)
         {
             return;
         }
@@ -191,14 +197,6 @@ public abstract class Npc: Tile
             return;
         }
         base.Draw(gameTime);
-        if (DialogueState == State.During)
-        {
-            DialogueBox.Draw(gameTime);
-            if (DialogueIndex < Dialogue.Count - 1)
-            {
-                SpriteBatch.Draw(Textures.General.NextArrow, new Rectangle(910,910, 32, 32), Color.White);
-            }
-        }
     }
 
     public override void Update(GameTime gameTime)
@@ -209,7 +207,28 @@ public abstract class Npc: Tile
             {
                 NextDialogue();
             }
+
+            if (ScreenManager.GetForeground()[ScreenManager.GetForeground().Count - 1] != DialogueBox)
+            {
+                ScreenManager.Add(DialogueBox);
+            }
+            if (DialogueIndex < Dialogue.Count - 1)
+            {
+                DialogueBox.SetDisplayArrow(true);
+            }
+            else
+            {
+                DialogueBox.SetDisplayArrow(false);
+            }
         }
+        else
+        {
+            if (ScreenManager.GetForeground()[ScreenManager.GetForeground().Count - 1] == DialogueBox)
+            {
+                ScreenManager.ClearTop();
+            }
+        }
+        
         if (Dead || _sayingLastWords)
         {
             if (GridPosition != GetDestination())
@@ -242,6 +261,10 @@ public abstract class Npc: Tile
             return;
         }
 
+        if (Path == null)
+        {
+            return;
+        }
         if (Destination > -1 && Destination < Path.Count)
         {
             if (Box.Y % 100 == 0 && Box.X % 100 == 0)

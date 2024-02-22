@@ -16,9 +16,9 @@ public class Robber: Npc
             Tuple.Create(Color.Purple, "Do I look like a criminal to you?! I'll be on my way now.")
         }, new Point(1, 4), new List<Point>()
         {
-            new Point(1, 2),
-            new Point(2, 2),
-            new Point(2, -1)
+            new(1, 2),
+            new(2, 2),
+            new(2, -1)
         },new List<Tuple<Color, string>>()
         {
             Tuple.Create(Color.Purple,"uRggh...")
@@ -34,14 +34,18 @@ public class Robber: Npc
         {
             Tuple.Create(Color.DarkRed,"Good work. You know it's thanks to you that we can have peace in this town."),
             Tuple.Create(Color.White,"..."),
-            Tuple.Create(Color.DarkRed,"Alright, pal. I have received reports of someone disturbing the peace near the southwest cabin. Mind taking care of it?"),
+            Tuple.Create(Color.DarkRed,"Cool. Anyway, I have received reports of someone disturbing the peace near Pav and Chenny's cabin. Mind taking care of it?"),
             Tuple.Create(Color.White,"..."),
-            Tuple.Create(Color.DarkRed,"Great. I knew I could count on you.")
+            Tuple.Create(Color.DarkRed,"Great, I knew I could count on you.")
         });
     }
 
     public void Start()
     {
+        if (Dead)
+        {
+            return;
+        }
         Destination = 0;
     }
 
@@ -75,10 +79,5 @@ public class Robber: Npc
                 Destination = -1;
             }
         }
-    }
-
-    public override void InitiateDialogue()
-    {
-            base.InitiateDialogue();
     }
 }

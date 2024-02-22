@@ -15,7 +15,7 @@ public class PathToHouse: World
             {new Point(4,-1),"SpawnEntrance"},
             {new Point(5,10),"Cabin1"},
             {new Point(6,10),"Cabin1"}
-        })
+        },false)
     {
         
     }

@@ -22,13 +22,7 @@ public class SpawnEntrance: World
             {new Point(2,10),"PathToHouse"},
             {new Point(3,10),"PathToHouse"},
             {new Point(4,10),"PathToHouse"}
-        })
+        },false)
     {
-    }
-
-    public override void Enter(Player player)
-    {
-        base.Enter(player);
-        player.SetDrawn(true);
     }
 }

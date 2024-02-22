@@ -15,15 +15,9 @@ public class Spawn : World
         {
             { new Point(-1, 4), "SpawnEntrance" },
             { new Point(-1, 5), "SpawnEntrance" }
-        })
+        },false)
     {
         NPCs.Add(Color.Maroon,new MayorJay(ScreenManager,spriteBatch,this));
-    }
-
-    public override void Enter(Player player)
-    {
-        base.Enter(player);
-        player.SetDrawn(false);
     }
     
     public override void Draw(GameTime gameTime)

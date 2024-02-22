@@ -9,7 +9,7 @@ public class Boom
     private int _frames;
     private Rectangle _box;
     private SpriteBatch _spriteBatch;
-    private const int Width = 20;
+    private const int Width = 25;
     private bool _done;
     
     public Boom(SpriteBatch spriteBatch,Point position)

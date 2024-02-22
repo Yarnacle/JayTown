@@ -23,7 +23,7 @@ public class ScreenManager
         _spriteBatch = spriteBatch;
         _foreground = new List<Screen>();
 
-        Worlds = new Dictionary<string, World>()
+        Worlds = new Dictionary<string, World>
         {
             { "Spawn", new Spawn(this, spriteBatch) },
             {"SpawnEntrance",new SpawnEntrance(this,spriteBatch)},
@@ -38,9 +38,9 @@ public class ScreenManager
         _kills++;
     }
 
-    public int GetKills()
+    public float GetEvilPercent()
     {
-        return _kills;
+        return _kills / 7f;
     }
     
     public List<Screen> GetForeground()
@@ -58,7 +58,7 @@ public void Update(GameTime gameTime)
                 screen.Update(gameTime);
             }
         }
-        catch
+        catch (InvalidOperationException e)
         {
             return;
         }
@@ -74,7 +74,7 @@ public void Update(GameTime gameTime)
         {
             screen.Draw(gameTime);
         }
-        _spriteBatch.Draw(Textures.General.Vignette,FullScreen.Box,Color.White *  .2f * _kills);
+        _spriteBatch.Draw(Textures.General.Vignette,FullScreen.Box,Color.White *  GetEvilPercent());
     }
 
     public void RemoveAt(int index)

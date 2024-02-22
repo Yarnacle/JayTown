@@ -9,6 +9,7 @@ namespace JayTown.Screens.WorldScreens;
 public abstract class World: FullScreen
 {
     protected bool IsRunning;
+    private bool _drawWeapon;
     protected Dictionary<Color,Npc> NPCs;
     
     protected Dictionary<Point,string> Exits;
@@ -19,8 +20,9 @@ public abstract class World: FullScreen
 
     protected Player Player;
 
-    protected World(ScreenManager manager, SpriteBatch spriteBatch, Texture2D background,Dictionary<Point,string> exits) : base(manager,spriteBatch)
+    protected World(ScreenManager manager, SpriteBatch spriteBatch, Texture2D background,Dictionary<Point,string> exits,bool drawWeapon) : base(manager,spriteBatch)
     {
+        _drawWeapon = drawWeapon;
         NPCs = new Dictionary<Color, Npc>();
         Player = null;
         Exits = exits;
@@ -53,14 +55,18 @@ public abstract class World: FullScreen
         
         Player = player;
         Player.SetWorld(this);
+        
         foreach (var npc in NPCs.Values)
         {
+            Console.WriteLine("Added " + npc);
             npc.SetPlayer(player);
             ScreenManager.Add(npc); 
         }
         
         ScreenManager.Add(Player);
         IsRunning = true;
+
+        Player.SetDrawn(_drawWeapon);
     }
 
     private void Exit(World world)
@@ -74,6 +80,11 @@ public abstract class World: FullScreen
         IsRunning = false;
         world.Enter(Player);
         Player = null;
+    }
+
+    public void SetAllowGun(bool allow)
+    {
+        _drawWeapon = allow;
     }
 
     public void AddNPC(Npc npc)

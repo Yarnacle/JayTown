@@ -17,7 +17,7 @@ public class FarmCorner: World
             {new Point(2,10),"SpawnEntrance"},
             {new Point(3,10),"SpawnEntrance"},
             {new Point(4,10),"SpawnEntrance"}
-        })
+        },false)
     {
         
     }

@@ -27,6 +27,8 @@ public class Player: Tile
     private bool _drawn;
     private readonly List<Bullet> _bullets;
     private readonly List<Boom> _booms;
+
+    private const bool GunOverride = false;
     
     public Player(ScreenManager manager,SpriteBatch spriteBatch,Texture2D texture, Point gridPosition): base(manager,spriteBatch,gridPosition,Color.Gray)
     {
@@ -113,7 +115,7 @@ public class Player: Tile
                 }
             }
         }
-        if (_drawn)
+        if (_drawn || GunOverride)
         {
             if (Game1.IsKeyPressed(Keys.Space))
             {
@@ -122,7 +124,7 @@ public class Player: Tile
         }
         if (_moveDirection != Direction.None)
         {
-            const int speed = 5;
+            const int speed = 10;
             switch (_moveDirection)
             {
                 case Direction.Down:
@@ -210,8 +212,8 @@ public class Player: Tile
         
         _spriteBatch.Draw(Textures.General.DestinationShadow,new Rectangle(_destination.X * 100,_destination.Y * 100,100,100),new Rectangle(0,0,_texture.Width,_texture.Height),Color.Black, 0, new Vector2(0,0), _horizontalFlip ? SpriteEffects.FlipHorizontally:SpriteEffects.None, 0);
         _spriteBatch.Draw(_texture, Box, new Rectangle(0, 0, _texture.Width,_texture.Height), Color.White, 0, new Vector2(0,0), _horizontalFlip ? SpriteEffects.FlipHorizontally:SpriteEffects.None, 0);
-        _spriteBatch.Draw(Textures.General.EvilEyes,Box,new Rectangle(0,0,_texture.Width,_texture.Height),Color.White * 0.2f * ScreenManager.GetKills(),0,new Vector2(0,0),_horizontalFlip ? SpriteEffects.FlipHorizontally:SpriteEffects.None,0);
-        if (_drawn)
+        _spriteBatch.Draw(Textures.General.EvilEyes,Box,new Rectangle(0,0,_texture.Width,_texture.Height),Color.White * ScreenManager.GetEvilPercent(),0,new Vector2(0,0),_horizontalFlip ? SpriteEffects.FlipHorizontally:SpriteEffects.None,0);
+        if (_drawn || GunOverride)
         {
             _spriteBatch.Draw(Textures.General.Gun, new Rectangle(Box.X - 50, Box.Y - 50, 200, 200),
                 new Rectangle(0, 0, Textures.General.Gun.Width, Textures.General.Gun.Height), Color.White, 0,

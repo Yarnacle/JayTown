@@ -15,9 +15,11 @@ public class TextPopup: Popup
     protected float Scale;
     protected int Padding;
     protected Texture2D Background;
+    protected bool DisplayArrow;
     
     public TextPopup(ScreenManager manager,SpriteBatch spriteBatch,Rectangle box,SpriteFont font,string text,Color color,float scale,int padding,Texture2D background) : base(manager,spriteBatch,box)
     {
+        DisplayArrow = false;
         Text = text;
         Font = font;
         Color = color;
@@ -27,11 +29,20 @@ public class TextPopup: Popup
         UpdateWrapped();
     }
 
+    public void SetDisplayArrow(bool display)
+    {
+        DisplayArrow = display;
+    }
+
     public override void Draw(GameTime gameTime)
     {
         SpriteBatch.Draw(Background,Box,Color.White);
         // SpriteBatch.Draw(Textures.General.SolidColor,new Rectangle(Box.X + Padding,Box.Y + Padding,Box.Width - 2 * Padding,Box.Height - 2 * Padding),Color.Yellow);
         SpriteBatch.DrawString(Font,WrappedText,new Vector2(Box.X + Padding,Box.Y + Padding),Color,0,new Vector2(0,0),Scale,SpriteEffects.None,0);
+        if (DisplayArrow)
+        {
+            SpriteBatch.Draw(Textures.General.NextArrow, new Rectangle(910, 910, 32, 32), Color.White);
+        }
     }
 
     public override void Update(GameTime gameTime)
