@@ -66,6 +66,7 @@ public static class Textures
         MaterialTiles.WhiteTile = LoadTile("MaterialTiles/WhiteTile.png", Color.WhiteSmoke);
         MaterialTiles.Water = LoadTile("MaterialTiles/Water.png", Color.Blue);
         MaterialTiles.Wall = LoadTile("MaterialTiles/Wall.png", Color.SlateGray);
+        MaterialTiles.SecretDoor = LoadTile("MaterialTiles/SecretDoor.png", Color.Gold);
 
         NPCs.Death1 = LoadTile("NPCs/Death1.png", new Color(150,150,150));
         NPCs.Death2 = LoadTile("NPCs/Death2.png", new Color(100,100,100));
@@ -79,6 +80,9 @@ public static class Textures
         NPCs.Nav = LoadTile("NPCs/Nav.png", Color.Pink);
         NPCs.Lan = LoadTile("NPCs/Lan.png", Color.Beige);
         NPCs.Shash = LoadTile("NPCs/Shash.png", Color.LightBlue);
+        NPCs.Lain = LoadTile("NPCs/Lain.png", Color.Wheat);
+        NPCs.Matt = LoadTile("NPCs/Matt.png", Color.Tomato);
+        NPCs.Pyro = LoadTile("NPCs/Pyro.png", Color.Honeydew);
     }
 
     private static Texture2D Load(string path)

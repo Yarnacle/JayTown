@@ -35,6 +35,6 @@ public class Bullet
 
     public void Draw(GameTime gameTime)
     {
-        _spriteBatch.Draw(Textures.General.Bullet,_box,new Rectangle(0,0,Textures.General.Bullet.Width,Textures.General.Bullet.Height),Color.Gold,0,new Vector2(0,0),_velocity < 0 ? SpriteEffects.FlipHorizontally:SpriteEffects.None,0);
+        _spriteBatch.Draw(Textures.General.Bullet,_box,new Rectangle(0,0,Textures.General.Bullet.Width,Textures.General.Bullet.Height),Color.Yellow,0,new Vector2(0,0),_velocity < 0 ? SpriteEffects.FlipHorizontally:SpriteEffects.None,0);
     }
 }

@@ -47,6 +47,13 @@ public abstract class Npc: Tile
             Dialogue == null ? "ERROR":Dialogue[0].Item2, Dialogue == null ? Color.Red:Dialogue[0].Item1, .5f, 60, Textures.General.DialogueBox);
     }
 
+    public void SetGridPosition(Point gridPosition)
+    {
+        GridPosition = gridPosition;
+        Box.X = GridPosition.X * 100;
+        Box.Y = GridPosition.Y * 100;
+    }
+    
     public void StartPath()
     {
         if (Dead)
@@ -174,15 +181,20 @@ public abstract class Npc: Tile
         Box.X = GridPosition.X * 100;
         Box.Y = GridPosition.Y * 100;
         World = world;
-        Path = newPath;
         NewDialogue(newDialogue);
         world.AddNPC(this);
+        NewPath(newPath);
+    }
+
+    public void NewPath(List<Point> newPath)
+    {
+        Path = newPath;
         Destination = -1;
     }
 
     public Point GetDestination()
     {
-        if (Destination < 0 || Destination > Path.Count)
+        if (Destination < 0 || Destination == Path.Count)
         {
             return GridPosition;
             

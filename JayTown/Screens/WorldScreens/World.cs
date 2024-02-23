@@ -69,7 +69,7 @@ public abstract class World: FullScreen
         Player.SetDrawn(_drawWeapon);
     }
 
-    private void Exit(World world)
+    protected virtual void Exit(World world)
     {
         foreach (var npc in NPCs.Values)
         {
@@ -148,7 +148,7 @@ public abstract class World: FullScreen
                 npc.InitiateDialogue();
                 return false;
             }
-            if (gridPosition == npc.GetDestination() || Player.GetGridPosition() == npc.GetDestination())
+            if ((gridPosition == npc.GetDestination() || Player.GetGridPosition() == npc.GetDestination()) && npc.GetColor() != Color.Gold)
             {
                 Console.WriteLine("NPC Collision blocked");
                 return false;

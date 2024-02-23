@@ -14,10 +14,13 @@ public class MayorJay: Npc
     {
         Tuple.Create(Color.IndianRed,"Hello! Ready for your next task?"),
         Tuple.Create(Color.White,"..."),
-        Tuple.Create(Color.IndianRed,"Talkative as usual. Anyway there's a ROBBER on the lose. Get him please.")
-    },new Point(6,4),null,null)
+        Tuple.Create(Color.IndianRed,"Talkative as usual. Anyway there's a ROBBER on the loose. Get him please.")
+    },new Point(6,4),null,new List<Tuple<Color, string>>()
     {
-        _plotProgress = 3;
+        Tuple.Create(Color.IndianRed,"How could you...? What happened to... peace...?")
+    })
+    {
+        _plotProgress = 4;
     }
 
     public override void FinishedDialogue()
@@ -42,6 +45,16 @@ public class MayorJay: Npc
             ScreenManager.Worlds["CobbleRoad"].AddNPC(new Nav(ScreenManager,SpriteBatch,ScreenManager.Worlds["CobbleRoad"]));
             ScreenManager.Worlds["RoadEnd"].AddNPC(new Lan(ScreenManager, SpriteBatch, ScreenManager.Worlds["RoadEnd"]));
             ScreenManager.Worlds["RoadEnd"].AddNPC(new Shash(ScreenManager,SpriteBatch,ScreenManager.Worlds["RoadEnd"]));
+        }
+        else if (_plotProgress == 4)
+        {
+            ScreenManager.Worlds["Hideout"].AddNPC(new Lain(ScreenManager,SpriteBatch,ScreenManager.Worlds["Hideout"]));
+            ScreenManager.Worlds["Cabin2"].AddNPC(new Matt(ScreenManager, SpriteBatch, ScreenManager.Worlds["Hideout"]));
+            ScreenManager.Worlds["Cabin2"].AddNPC(new Pyro(ScreenManager,SpriteBatch,ScreenManager.Worlds["Hideout"]));
+        }
+        else if (_plotProgress == 5)
+        {
+            Player.SetDrawn(true);
         }
 
         _plotProgress++;
