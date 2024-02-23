@@ -21,7 +21,7 @@ public class MayorJay: Npc
         Tuple.Create(Color.IndianRed,"How could you...? What happened to... peace...?")
     })
     {
-        _plotProgress = 5;
+        _plotProgress = 0;
     }
 
     public override void FinishedDialogue()
