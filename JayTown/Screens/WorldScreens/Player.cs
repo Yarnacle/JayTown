@@ -27,7 +27,8 @@ public class Player: Tile
     private bool _drawn;
     private readonly List<Bullet> _bullets;
     private readonly List<Boom> _booms;
-
+    
+    private const int Speed = 20;
     private const bool GunOverride = true;
     
     public Player(ScreenManager manager,SpriteBatch spriteBatch,Texture2D texture, Point gridPosition): base(manager,spriteBatch,gridPosition,Color.Gray)
@@ -130,20 +131,19 @@ public class Player: Tile
         
         if (_moveDirection != Direction.None)
         {
-            const int speed = 10;
             switch (_moveDirection)
             {
                 case Direction.Down:
-                    Box.Y += speed;
+                    Box.Y += Speed;
                     break;
                 case Direction.Up:
-                    Box.Y -= speed;
+                    Box.Y -= Speed;
                     break;
                 case Direction.Right:
-                    Box.X += speed;
+                    Box.X += Speed;
                     break;
                 case Direction.Left:
-                    Box.X -= speed;
+                    Box.X -= Speed;
                     break;
             }
             

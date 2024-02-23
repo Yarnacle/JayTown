@@ -17,7 +17,7 @@ public class MayorJay: Npc
         Tuple.Create(Color.IndianRed,"Talkative as usual. Anyway there's a ROBBER on the lose. Get him please.")
     },new Point(6,4),null,null)
     {
-        _plotProgress = 0;
+        _plotProgress = 3;
     }
 
     public override void FinishedDialogue()

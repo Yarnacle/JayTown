@@ -27,7 +27,8 @@ public class Shash: Npc
             Tuple.Create(Color.White,"..."),
             Tuple.Create(Color.CornflowerBlue,"What!? I am in every way more qualified to lead this town than Lan, who is COMPLETLY undeserving of his position. How are you allowing this corruption? That's actually messed up."),
             Tuple.Create(LanTextColor,"Yeah, Shash, you tell him!"),
-            Tuple.Create(LanTextColor,"Wait, no, you're on my side. Beat his ass, Jay!"),
+            Tuple.Create(LanTextColor,"Wait, no, he's on my side. Beat his ass, Jay!"),
+            Tuple.Create(Color.White,"..."),
             Tuple.Create(Color.CornflowerBlue,"Oh, AND the mayor wants me gone, huh? Just for trying to lead this town. Nah, this town is messed up.")
         }, new Point(5, 6), new List<Point>()
         {
@@ -53,7 +54,14 @@ public class Shash: Npc
         }
         ScreenManager.Worlds["Spawn"].GetNPCs()[Color.Maroon].NewDialogue(new List<Tuple<Color, string>>()
         {
-            // new mayor dialogue
+            Tuple.Create(Color.IndianRed,"You got him?"),
+            Tuple.Create(Color.White,"..."),
+            Tuple.Create(Color.IndianRed,"Good."),
+            Tuple.Create(Color.White,"..."),
+            Tuple.Create(Color.IndianRed,"Yes, Lan is indeed my son. Regardless, you did the right thing to deal with Shash. He was a threat to the safety of this town."),
+            Tuple.Create(Color.White,"..."),
+            Tuple.Create(Color.IndianRed,"Whatever. There are more important things to worry about right now."),
+            Tuple.Create(Color.IndianRed,"I suspect that there's a group plotting against me. I don't know where they meet, but I think Vorrow was one of them. Find them, and take them out. The town is counting on you.")
         });
     }
 
