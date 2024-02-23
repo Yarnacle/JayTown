@@ -15,7 +15,7 @@ public class MayorJay: Npc
         Tuple.Create(Color.IndianRed,"Hello! Ready for your next task?"),
         Tuple.Create(Color.White,"..."),
         Tuple.Create(Color.IndianRed,"Talkative as usual. Anyway there's a ROBBER on the lose. Get him please.")
-    },new Point(6,4),new List<Point>(),null)
+    },new Point(6,4),null,null)
     {
         _plotProgress = 0;
     }
@@ -40,6 +40,8 @@ public class MayorJay: Npc
         else if (_plotProgress == 3)
         {
             ScreenManager.Worlds["CobbleRoad"].AddNPC(new Nav(ScreenManager,SpriteBatch,ScreenManager.Worlds["CobbleRoad"]));
+            ScreenManager.Worlds["RoadEnd"].AddNPC(new Lan(ScreenManager, SpriteBatch, ScreenManager.Worlds["RoadEnd"]));
+            ScreenManager.Worlds["RoadEnd"].AddNPC(new Shash(ScreenManager,SpriteBatch,ScreenManager.Worlds["RoadEnd"]));
         }
 
         _plotProgress++;

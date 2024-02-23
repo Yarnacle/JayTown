@@ -51,6 +51,8 @@ public static class Textures
         PixelMaps.FarmRoad = Load("PixelMaps/FarmRoad.png");
         PixelMaps.FarmBend = Load("PixelMaps/FarmBend.png");
         PixelMaps.CobbleRoad = Load("PixelMaps/CobbleRoad.png");
+        PixelMaps.RoadEnd = Load("PixelMaps/RoadEnd.png");
+        PixelMaps.Hideout = Load("PixelMaps/Hideout.png");
         
         HomeScreen.Background = Load("HomeScreen/Background.png");
 
@@ -60,7 +62,7 @@ public static class Textures
         MaterialTiles.Bark = LoadTile("MaterialTiles/Bark.png", Color.Brown);
         MaterialTiles.Farmland = LoadTile("MaterialTiles/Farmland.png", Color.GreenYellow);
         MaterialTiles.Grass = LoadTile("MaterialTiles/Grass.png", Color.Green);
-        MaterialTiles.Ice = LoadTile("MaterialTiles/Ice.png", Color.LightBlue);
+        // MaterialTiles.Ice = LoadTile("MaterialTiles/Ice.png", Color.LightBlue);
         MaterialTiles.WhiteTile = LoadTile("MaterialTiles/WhiteTile.png", Color.WhiteSmoke);
         MaterialTiles.Water = LoadTile("MaterialTiles/Water.png", Color.Blue);
         MaterialTiles.Wall = LoadTile("MaterialTiles/Wall.png", Color.SlateGray);
@@ -75,6 +77,8 @@ public static class Textures
         NPCs.Pav = LoadTile("NPCs/Pav.png", Color.DarkOrange);
         NPCs.Vorrow = LoadTile("NPCs/Vorrow.png", Color.DarkGreen);
         NPCs.Nav = LoadTile("NPCs/Nav.png", Color.Pink);
+        NPCs.Lan = LoadTile("NPCs/Lan.png", Color.Beige);
+        NPCs.Shash = LoadTile("NPCs/Shash.png", Color.LightBlue);
     }
 
     private static Texture2D Load(string path)

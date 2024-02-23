@@ -47,6 +47,37 @@ public abstract class Npc: Tile
             Dialogue == null ? "ERROR":Dialogue[0].Item2, Dialogue == null ? Color.Red:Dialogue[0].Item1, .5f, 60, Textures.General.DialogueBox);
     }
 
+    public void StartPath()
+    {
+        if (Dead)
+        {
+            return;
+        }
+        Destination = 0;
+    }
+
+    public void SkipPath()
+    {
+        if (Path == null)
+        {
+            return;
+        }
+
+        if (Destination == -1)
+        {
+            return;
+        }
+        GridPosition = Path[Path.Count - 1];
+        Box.X = GridPosition.X * 100;
+        Box.Y = GridPosition.Y * 100;
+        Destination = Path.Count;
+    }
+
+    public void SkipDeath()
+    {
+        _deathFrames = 41;
+    }
+
     public void SetPlayer(Player player)
     {
         Player = player;
@@ -146,6 +177,7 @@ public abstract class Npc: Tile
         Path = newPath;
         NewDialogue(newDialogue);
         world.AddNPC(this);
+        Destination = -1;
     }
 
     public Point GetDestination()

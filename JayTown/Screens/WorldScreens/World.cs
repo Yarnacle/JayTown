@@ -74,6 +74,11 @@ public abstract class World: FullScreen
         foreach (var npc in NPCs.Values)
         {
             npc.SetPlayer(null);
+            npc.SkipPath();
+            if (npc.IsDead())
+            {
+                npc.SkipDeath();
+            }
         }
         ScreenManager.SetBackgroud(world);
         ScreenManager.ClearForeground();
@@ -82,9 +87,9 @@ public abstract class World: FullScreen
         Player = null;
     }
 
-    public void SetAllowGun(bool allow)
+    public Dictionary<Point,string> GetExits()
     {
-        _drawWeapon = allow;
+        return Exits;
     }
 
     public void AddNPC(Npc npc)

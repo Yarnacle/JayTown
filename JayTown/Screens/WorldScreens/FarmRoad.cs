@@ -32,7 +32,7 @@ public class FarmRoad: World
     {
         base.Enter(player);
         if (NPCs.ContainsKey(Color.Purple) && !NPCs[Color.Purple].IsDead()) {
-            ((Robber)NPCs[Color.Purple]).Start();
+            ((Robber)NPCs[Color.Purple]).StartPath();
             Player.SetDrawn(true);
         }
     }

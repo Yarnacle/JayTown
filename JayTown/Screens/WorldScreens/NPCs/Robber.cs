@@ -39,15 +39,6 @@ public class Robber: Npc
         });
     }
 
-    public void Start()
-    {
-        if (Dead)
-        {
-            return;
-        }
-        Destination = 0;
-    }
-
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
@@ -55,28 +46,28 @@ public class Robber: Npc
         {
             return;
         }
-        if (DialogueState == State.After)
-        {
-            if (Destination == -1 && Dialogue.Count != 1)
-            {
-                Destination = 0;
-            }
-        }
         if (Destination == Path.Count)
         {
             Console.WriteLine("Pathing finished");
             if (World == ScreenManager.Worlds["SpawnEntrance"])
             {
                 World.RemoveNPC(Color);
-                ChangeWorld(ScreenManager.Worlds["FarmRoad"],new Point(3,5),new List<Point>(){new Point(0,5),new Point(0,0)},new List<Tuple<Color, string>>()
+                ChangeWorld(ScreenManager.Worlds["FarmRoad"],new Point(3,5),new List<Point>(){new Point(0,5)},new List<Tuple<Color, string>>()
                 {
                         
                 });
                 DialogueState = State.After;
             }
-            else if (World == ScreenManager.Worlds["FarmRoad"]) {
-                Destination = -1;
+            else if (World == ScreenManager.Worlds["FarmRoad"])
+            {
+                Path = new List<Point>() { new Point(0, 0), new Point(0, 5) };
+                StartPath();
             }
         }
+    }
+
+    public override void FinishedDialogue()
+    {
+        StartPath();
     }
 }

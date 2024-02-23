@@ -26,19 +26,12 @@ public class Nav: Npc
 
     public override void FinishedDialogue()
     {
-        
+        StartPath();
     }
 
     public override void Update(GameTime gameTime)
     {
         base.Update(gameTime);
-        if (DialogueState == State.After)
-        {
-            if (Destination == -1 && Dialogue.Count != 1)
-            {
-                Destination = 0;
-            }
-        }
         if (Destination == Path.Count)
         {
             Console.WriteLine("Pathing finished");

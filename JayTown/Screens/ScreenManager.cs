@@ -31,7 +31,9 @@ public class ScreenManager
             {"PathToHouse",new PathToHouse(this,spriteBatch)},
             {"Cabin1",new Cabin1(this,spriteBatch)},
             {"Cabin2",new Cabin2(this,spriteBatch)},
-            {"CobbleRoad",new CobbleRoad(this,spriteBatch)}
+            {"CobbleRoad",new CobbleRoad(this,spriteBatch)},
+            {"RoadEnd",new RoadEnd(this,spriteBatch)},
+            {"Hideout",new Hideout(this,spriteBatch)}
         };
     }
 
@@ -60,7 +62,7 @@ public void Update(GameTime gameTime)
                 screen.Update(gameTime);
             }
         }
-        catch (InvalidOperationException e)
+        catch (InvalidOperationException)
         {
             return;
         }
