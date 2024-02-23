@@ -37,6 +37,11 @@ public class ScreenManager
         };
     }
 
+    public void End()
+    {
+        Add(new Fadeout(this,_spriteBatch));
+    }
+    
     public void AddKill()
     {
         _kills++;
@@ -44,7 +49,7 @@ public class ScreenManager
 
     public float GetEvilPercent()
     {
-        return _kills / 7f;
+        return _kills / 5f;
     }
     
     public List<Screen> GetForeground()

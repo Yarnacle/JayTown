@@ -41,6 +41,7 @@ public static class Textures
         General.DialogueBox = Load("General/DialogueBox.png");
         General.NextArrow = Load("General/NextArrow.png");
         General.EvilEyes = Load("General/EvilEyes.png");
+        General.MouthedJay = LoadTile("General/MouthedSheriffJay.png", Color.Gray);
 
 
         PixelMaps.Spawn = Load("PixelMaps/Spawn.png");
@@ -83,6 +84,7 @@ public static class Textures
         NPCs.Lain = LoadTile("NPCs/Lain.png", Color.Wheat);
         NPCs.Matt = LoadTile("NPCs/Matt.png", Color.Tomato);
         NPCs.Pyro = LoadTile("NPCs/Pyro.png", Color.Honeydew);
+        NPCs.Raaj = LoadTile("NPCs/Raaj.png", Color.DarkBlue);
     }
 
     private static Texture2D Load(string path)

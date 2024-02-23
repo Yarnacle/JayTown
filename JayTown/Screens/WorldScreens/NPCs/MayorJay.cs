@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text.Encodings.Web;
+using JayTown.GameTextures;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -20,7 +21,7 @@ public class MayorJay: Npc
         Tuple.Create(Color.IndianRed,"How could you...? What happened to... peace...?")
     })
     {
-        _plotProgress = 4;
+        _plotProgress = 5;
     }
 
     public override void FinishedDialogue()
@@ -58,5 +59,11 @@ public class MayorJay: Npc
         }
 
         _plotProgress++;
+    }
+
+    public override void AfterDeath()
+    {
+        ScreenManager.Worlds["SpawnEntrance"].AddNPC(new Raaj(ScreenManager,SpriteBatch,ScreenManager.Worlds["SpawnEntrance"]));
+        Player.SetTexture(Textures.General.MouthedJay);
     }
 }
