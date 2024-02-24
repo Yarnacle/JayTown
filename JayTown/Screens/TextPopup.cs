@@ -79,7 +79,7 @@ public class TextPopup: Popup
         }
         catch
         {
-            Console.WriteLine(Text);
+            // Console.WriteLine(Text);
         }
 
         var lines = Text.Split('\n');

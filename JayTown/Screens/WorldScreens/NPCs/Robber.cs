@@ -48,7 +48,7 @@ public class Robber: Npc
         }
         if (Destination == Path.Count)
         {
-            Console.WriteLine("Pathing finished");
+            // Console.WriteLine("Pathing finished");
             if (World == ScreenManager.Worlds["SpawnEntrance"])
             {
                 World.RemoveNPC(Color);

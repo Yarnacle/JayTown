@@ -74,7 +74,7 @@ public class Shash: Npc
         }
         if (Destination == Path.Count)
         {
-            Console.WriteLine("Pathing finished");
+            // Console.WriteLine("Pathing finished");
             if (World == ScreenManager.Worlds["RoadEnd"])
             {
                 World.RemoveNPC(Color);

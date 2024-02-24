@@ -58,7 +58,7 @@ public abstract class World: FullScreen
         
         foreach (var npc in NPCs.Values)
         {
-            Console.WriteLine("Added " + npc);
+            // Console.WriteLine("Added " + npc);
             npc.SetPlayer(player);
             ScreenManager.Add(npc); 
         }
@@ -150,7 +150,7 @@ public abstract class World: FullScreen
             }
             if ((gridPosition == npc.GetDestination() || Player.GetGridPosition() == npc.GetDestination()) && npc.GetColor() != Color.Gold)
             {
-                Console.WriteLine("NPC Collision blocked");
+                // Console.WriteLine("NPC Collision blocked");
                 return false;
             }
         }

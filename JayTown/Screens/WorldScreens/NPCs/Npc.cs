@@ -311,7 +311,7 @@ public abstract class Npc: Tile
                 {
                     GridPosition = GetDestination();
                     Destination = -1;
-                    Console.WriteLine("No more remains momentum");
+                    // Console.WriteLine("No more remains momentum");
                 }
             }
             _deathFrames++;

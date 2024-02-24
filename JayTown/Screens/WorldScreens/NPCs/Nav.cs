@@ -34,7 +34,7 @@ public class Nav: Npc
         base.Update(gameTime);
         if (Destination == Path.Count)
         {
-            Console.WriteLine("Pathing finished");
+            // Console.WriteLine("Pathing finished");
             World.RemoveNPC(Color);
         }
     }
